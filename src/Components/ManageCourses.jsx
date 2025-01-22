@@ -291,7 +291,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       Course Slot
                     </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
+                    <th className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400">
                       Actions
                     </th>
                   </tr>
@@ -308,7 +308,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                       <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
                         {course.slot}
                       </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                      <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
                         <button
                           onClick={() => handleAddCourse(course)}
                           className="bg-green-500 text-white text-xs px-3 py-2 rounded-md hover:bg-green-600"
