@@ -21,6 +21,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
 
     const trimmedSearchQuery = searchQuery.trim();
     setIsLoading(true);
+    setShowResults(true);
     try {
       const response = await fetch(
         `https://script.google.com/macros/s/AKfycbwyl2f67XNgQAUJejU3GO-6tnLF818k8AHku5XyGdeQgD9ysP8CtUFkUudKSOoJxfA/exec?query=${encodeURIComponent(
@@ -33,7 +34,6 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       console.error("Error fetching courses:", error);
       alert("Failed to fetch courses. Please try again.");
     } finally {
-      setShowResults(true);
       setIsLoading(false);
     }
   };
@@ -240,33 +240,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             className="bg-blue-500 text-white text-xs sm:text-sm px-5 py-2 rounded-md hover:bg-blue-600"
             disabled={isLoading}
           >
-            {isLoading ? (
-              <div className="flex items-center gap-2">
-                Searching
-                <svg
-                  className="animate-spin h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                  ></path>
-                </svg>
-              </div>
-            ) : (
-              "Search"
-            )}
+            {isLoading ? "Searching..." : "Search"}
           </button>
         </div>
       </div>
@@ -278,52 +252,59 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             Search Results
           </h3>
           <div className="overflow-x-auto">
-            {filteredCourses.length > 0 ? (
-              <table className="table-auto w-full border border-gray-500">
-                <thead>
-                  <tr className="bg-slate-200">
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Course Code
-                    </th>
-                    <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Course Name
-                    </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Course Slot
-                    </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredCourses.map((course, index) => (
-                    <tr key={index} className="odd:bg-white even:bg-slate-200">
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
-                        {course.code}
-                      </td>
-                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
-                        {course.name}
-                      </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
-                        {course.slot}
-                      </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
-                        <button
-                          onClick={() => handleAddCourse(course)}
-                          className="bg-green-500 text-white text-xs px-3 py-2 rounded-md hover:bg-green-600"
-                        >
-                          Add
-                        </button>
-                      </td>
+            {isLoading === false ? (
+              filteredCourses.length > 0 ? (
+                <table className="table-auto w-full border border-gray-500">
+                  <thead>
+                    <tr className="bg-slate-200">
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
+                        Course Code
+                      </th>
+                      <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
+                        Course Name
+                      </th>
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
+                        Course Slot
+                      </th>
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
+                        Actions
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {filteredCourses.map((course, index) => (
+                      <tr
+                        key={index}
+                        className="odd:bg-white even:bg-slate-200"
+                      >
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                          {course.code}
+                        </td>
+                        <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                          {course.name}
+                        </td>
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                          {course.slot}
+                        </td>
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                          <button
+                            onClick={() => handleAddCourse(course)}
+                            className="bg-green-500 text-white text-xs px-3 py-2 rounded-md hover:bg-green-600"
+                          >
+                            Add
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p className="text-gray-500 text-sm text-center">
+                  No courses found for your search query.
+                </p>
+              )
             ) : (
-              <p className="text-gray-500 text-sm text-center">
-                No courses found for your search query.
-              </p>
+              <p className="text-gray-500 text-sm text-center">Searching...</p>
             )}
           </div>
         </div>
@@ -374,7 +355,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     ? handleConfirmAddCourse
                     : handleConfirmUpdateCourse
                 }
-                className="bg-green-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-green-600"
+                className="bg-blue-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
               >
                 {addOrDrop === "add" ? "Add" : "Update"}
               </button>
