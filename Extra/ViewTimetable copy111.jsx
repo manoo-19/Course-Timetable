@@ -21,32 +21,18 @@ const ViewTimetable = ({ courses = [] }) => {
     ["E", "F", "D", "G", " ", "S", "R"],
   ];
 
-  const dslotColors = [
-    { slot: "A", color: "#AF3029" }, // Red-600
-    { slot: "B", color: "#BC5215" }, // Orange-600
-    { slot: "C", color: "#AD8301" }, // Yellow-600
-    { slot: "D", color: "#66800B" }, // Green-600
-    { slot: "E", color: "#24837B" }, // Cyan-600
-    { slot: "F", color: "#205EA6" }, // Blue-600
-    { slot: "G", color: "#5E409D" }, // Purple-600
-    { slot: "P", color: "#A02F6F" }, // Magenta-600
-    { slot: "Q", color: "#ec1f5b" }, // Hot-Pink-600
-    { slot: "R", color: "#0C7B93" }, // Teal-600
-    { slot: "S", color: "#94776d" }, // Wood-600
-  ];
-
   const slotColors = [
-    { slot: "A", color: "#D14D41" }, // Red-400
-    { slot: "B", color: "#DA702C" }, // Orange-400
-    { slot: "C", color: "#D0A215" }, // Yellow-400
-    { slot: "D", color: "#879A39" }, // Green-400
-    { slot: "E", color: "#3AA99F" }, // Cyan-400
-    { slot: "F", color: "#4385BE" }, // Blue-400
-    { slot: "G", color: "#8B7EC8" }, // Purple-400
-    { slot: "P", color: "#CE5D97" }, // Magenta-400
-    { slot: "Q", color: "#ff204e" }, // Hot-Pink-400
-    { slot: "R", color: "#00A8CC" }, // Teal-400
-    { slot: "S", color: "#9c763e" }, // Wood-400
+    { slot: "A", color: "#FF5733" }, // Vivid Red-Orange
+    { slot: "B", color: "#33FF57" }, // Bright Green
+    { slot: "C", color: "#3357FF" }, // Bright Blue
+    { slot: "D", color: "#FFC300" }, // Golden Yellow
+    { slot: "E", color: "#FF33A6" }, // Vivid Pink
+    { slot: "F", color: "#33FFF6" }, // Cyan
+    { slot: "G", color: "#8D33FF" }, // Purple
+    { slot: "P", color: "#FF6F33" }, // Deep Orange
+    { slot: "Q", color: "#33FFB2" }, // Aquamarine
+    { slot: "R", color: "#FF573D" }, // Coral
+    { slot: "S", color: "#33D4FF" }, // Sky Blue
   ];
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -58,25 +44,19 @@ const ViewTimetable = ({ courses = [] }) => {
   const getCourseDetails = (slot) => {
     const course = courses.find((course) => course.slot === slot);
     return course ? (
-      <div className="flex flex-col text-white font-medium">
+      <div className="flex flex-col">
         {showCourseCode && (
-          <div className="flex flex-col items-center gap-1">
-            <span>
-              {course.code} - {slot}
-            </span>
-            <hr className="w-14 border-t" />
-          </div>
+          <span className="border-b border-gray-400 pb-1">
+            {course.code} - {slot}
+          </span>
         )}
         <span className="py-1">{course.alias}</span>
         {showVenue && (
-          <div className="flex flex-col items-center gap-1">
-            <hr className="w-14 border-t" />
-            <span>{course.venue}</span>
-          </div>
+          <span className="border-t border-gray-400 pt-1">{course.venue}</span>
         )}
       </div>
     ) : (
-      <span className="text-white font-medium">{slot}</span>
+      <span>{slot}</span>
     );
   };
 
@@ -158,14 +138,14 @@ const ViewTimetable = ({ courses = [] }) => {
           <table className="table-auto w-full border-collapse">
             <thead>
               <tr>
-                <th className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2">
+                <th className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2">
                   Day
                 </th>
                 {slots.map((time, index) => (
                   <th
                     key={index}
                     scope="col"
-                    className="min-w-[7.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 text-center"
+                    className="min-w-[7.5rem] border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 text-center"
                   >
                     {time}
                   </th>
@@ -174,8 +154,8 @@ const ViewTimetable = ({ courses = [] }) => {
             </thead>
             <tbody>
               {days.map((day, dayIndex) => (
-                <tr key={dayIndex} className="odd:bg-white even:bg-slate-300">
-                  <td className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 font-semibold text-center">
+                <tr key={dayIndex} className="odd:bg-white even:bg-slate-200">
+                  <td className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 font-semibold text-center">
                     {day}
                   </td>
                   {timetable[dayIndex].map((slot, slotIndex) => {
@@ -183,7 +163,7 @@ const ViewTimetable = ({ courses = [] }) => {
                       return dayIndex === 0 ? (
                         <td
                           key={slotIndex}
-                          className="min-w-[7.5rem] border border-slate-50 p-2 bg-slate-300"
+                          className="min-w-[7.5rem] border border-gray-400 p-2 bg-slate-200"
                           rowSpan={5}
                         >
                           <div className="flex justify-center items-center">
@@ -192,14 +172,10 @@ const ViewTimetable = ({ courses = [] }) => {
                         </td>
                       ) : null;
                     }
-                    const color =
-                      slotColors.find((color) => color.slot === slot)?.color ||
-                      "#64748b";
                     return (
                       <td
                         key={slotIndex}
-                        className="min-w-[7.5rem] border text-xs sm:text-sm border-slate-50 p-2 text-center"
-                        style={{ backgroundColor: color }}
+                        className="min-w-[7.5rem] border text-xs sm:text-sm border-gray-400 p-2 text-center"
                       >
                         {getCourseDetails(slot)}
                       </td>
