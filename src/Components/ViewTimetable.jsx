@@ -158,7 +158,7 @@ const ViewTimetable = ({ courses = [] }) => {
           <table className="table-auto w-full border-collapse">
             <thead>
               <tr>
-                <th className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2">
+                <th className="min-w-[4rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2">
                   Day
                 </th>
                 {slots.map((time, index) => (
@@ -175,7 +175,7 @@ const ViewTimetable = ({ courses = [] }) => {
             <tbody>
               {days.map((day, dayIndex) => (
                 <tr key={dayIndex} className="odd:bg-white even:bg-slate-300">
-                  <td className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 font-semibold text-center">
+                  <td className="min-w-[4rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 font-semibold text-center">
                     {day}
                   </td>
                   {timetable[dayIndex].map((slot, slotIndex) => {

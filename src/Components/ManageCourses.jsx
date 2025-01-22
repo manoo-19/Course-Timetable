@@ -160,7 +160,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
         </h3>
         <div className="overflow-x-auto">
           {courses.length > 0 ? (
-            <table className="table-auto w-full border border-gray-500">
+            <table className="table-auto w-full h-full border border-gray-500">
               <thead>
                 <tr className="bg-slate-200">
                   <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
@@ -169,7 +169,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                   <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                     Course Name
                   </th>
-                  <th className="min-w-[4.5rem] p-2 text-xs sm:text-sm border border-gray-400">
+                  <th className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                     Alias Name
                   </th>
                   <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
@@ -192,7 +192,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
                       {course.name}
                     </td>
-                    <td className="min-w-[4.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
                       {course.alias}
                     </td>
                     <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
