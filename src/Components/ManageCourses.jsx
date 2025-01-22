@@ -17,11 +17,13 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       alert("Please enter a search query.");
       return;
     }
+
+    const trimmedSearchQuery = searchQuery.trim();
     setIsLoading(true);
     try {
       const response = await fetch(
         `https://script.google.com/macros/s/AKfycbwyl2f67XNgQAUJejU3GO-6tnLF818k8AHku5XyGdeQgD9ysP8CtUFkUudKSOoJxfA/exec?query=${encodeURIComponent(
-          searchQuery
+          trimmedSearchQuery
         )}`
       );
       const data = await response.json();
@@ -120,8 +122,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   };
 
   const QuerySearcher = (query) => {
-    const trimmedValue = query.target.value.trim();
-    setSearchQuery(trimmedValue);
+    setSearchQuery(query.target.value);
   };
 
   const handleCancelModal = () => {
