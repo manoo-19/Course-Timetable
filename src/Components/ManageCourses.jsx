@@ -50,6 +50,15 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
     const trimmedAliasCourseName = aliasCourseName.trim();
     const trimmedVenue = venue.trim().toUpperCase();
 
+    const isAliasExist = courses.some(
+      (c) => c.alias === trimmedAliasCourseName
+    );
+
+    if (isAliasExist) {
+      alert("This alias is already taken by another course.");
+      return;
+    }
+
     // if (!trimmedAliasCourseName || !trimmedVenue) {
     //   alert("Please fill in all the fields.");
     //   return;
@@ -102,10 +111,16 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
     };
 
     const isCourseExist = courses.some((c) => c.code === updatedCourse.code);
+    const isAliasExist = courses.some((c) => c.alias === updatedCourse.alias);
     const isSlotTaken = courses.some((c) => c.slot === updatedCourse.slot);
 
     if (isCourseExist) {
       alert("This course is already registered.");
+      return;
+    }
+
+    if (isAliasExist) {
+      alert("This alias is already taken by another course.");
       return;
     }
 
@@ -136,7 +151,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   return (
     <div className="flex flex-col items-center justify-center gap-6">
       {/* Registered Courses */}
-      <div className="w-full border border-gray-200 bg-white py-4 px-3">
+      <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg py-4 px-3">
         <h3 className="text-base sm:text-lg font-medium mb-4">
           Registered Courses
         </h3>
@@ -202,7 +217,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       </div>
 
       {/* Search Bar */}
-      <div className="w-full overflow-x-auto border border-gray-200 bg-white py-4 px-3">
+      <div className="w-full overflow-x-auto border border-gray-200 bg-white shadow-md rounded-lg py-4 px-3">
         <h3 className="text-base sm:text-lg font-medium mb-4">Add a Course</h3>
         <div className="flex flex-col sm:flex-row items-center gap-4 max-w-md mx-auto">
           <input
@@ -210,6 +225,11 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             placeholder="Enter Course Code or Name"
             value={searchQuery}
             onChange={QuerySearcher}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
             className="p-2 border rounded-md w-full text-sm text-center sm:text-left"
           />
           <button
@@ -223,7 +243,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       </div>
 
       {/* Search Results */}
-      <div className="w-full border border-gray-200 bg-white py-4 px-3">
+      <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg py-4 px-3">
         <h3 className="text-base sm:text-lg font-medium mb-4">
           Search Results
         </h3>

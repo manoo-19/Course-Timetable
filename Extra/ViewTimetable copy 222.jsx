@@ -22,6 +22,7 @@ const ViewTimetable = ({ courses = [] }) => {
   ];
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
   const timetableRef = useRef(null);
 
   const getCourseDetails = (slot) => {
@@ -40,13 +41,21 @@ const ViewTimetable = ({ courses = [] }) => {
   };
 
   const handleExportAsImage = async () => {
+    const timetableElement = timetableRef.current;
+
+    if (!timetableElement) {
+      console.error("Timetable element not found!");
+      return;
+    }
+
     try {
-      const dataUrl = await toPng(timetableRef.current, {
+      const dataUrl = await toPng(timetableElement, {
         backgroundColor: "white",
         cacheBust: true,
-        width: timetableRef.current.scrollWidth,
-        height: timetableRef.current.scrollHeight,
+        width: timetableElement.scrollWidth,
+        height: timetableElement.scrollHeight,
       });
+
       const link = document.createElement("a");
       link.download = "timetable.png";
       link.href = dataUrl;
@@ -62,62 +71,62 @@ const ViewTimetable = ({ courses = [] }) => {
 
   return (
     <div className="flex flex-col gap-6">
-      <div
-        id="timetable"
-        ref={timetableRef}
-        className="overflow-x-auto border border-gray-200 bg-white p-4 print:overflow-visible print:w-full print:p-0"
-      >
-        <table className="w-full border-collapse table-fixed print:table-auto">
-          <thead>
-            <tr>
-              <th className="w-24 border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 print:text-sm">
-                Day
-              </th>
-              {slots.map((time, index) => (
-                <th
-                  key={index}
-                  className="w-32 border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 text-center print:text-sm"
-                >
-                  {time}
+      <div className="bg-white p-4 shadow-md rounded-lg">
+        <div id="timetable" ref={timetableRef} className="overflow-auto">
+          <table className="table-auto w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2">
+                  Day
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {days.map((day, dayIndex) => (
-              <tr key={dayIndex} className="odd:bg-white even:bg-slate-200">
-                <td className="border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 font-semibold text-center print:text-sm">
-                  {day}
-                </td>
-                {timetable[dayIndex].map((slot, slotIndex) => {
-                  if (slot === " " && slotIndex === 4) {
-                    return dayIndex === 0 ? (
+                {slots.map((time, index) => (
+                  <th
+                    key={index}
+                    scope="col"
+                    className="min-w-[7.5rem] border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 text-center"
+                  >
+                    {time}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {days.map((day, dayIndex) => (
+                <tr key={dayIndex} className="odd:bg-white even:bg-slate-200">
+                  <td className="min-w-[3.5rem] border text-xs sm:text-sm bg-slate-200 border-gray-400 p-2 font-semibold text-center">
+                    {day}
+                  </td>
+                  {timetable[dayIndex].map((slot, slotIndex) => {
+                    if (slot === " " && slotIndex === 4) {
+                      return dayIndex === 0 ? (
+                        <td
+                          key={slotIndex}
+                          className="min-w-[7.5rem] border border-gray-400 p-2 bg-slate-200"
+                          rowSpan={5}
+                        >
+                          <div className="flex justify-center items-center">
+                            <ImSpoonKnife className="text-4xl" />
+                          </div>
+                        </td>
+                      ) : null;
+                    }
+                    return (
                       <td
                         key={slotIndex}
-                        className="border border-gray-400 p-2 bg-slate-200"
-                        rowSpan={5}
+                        className="min-w-[7.5rem] border text-xs sm:text-sm border-gray-400 p-2 text-center"
                       >
-                        <div className="flex justify-center items-center">
-                          <ImSpoonKnife className="text-4xl" />
-                        </div>
+                        {getCourseDetails(slot)}
                       </td>
-                    ) : null;
-                  }
-                  return (
-                    <td
-                      key={slotIndex}
-                      className="border text-xs sm:text-sm border-gray-400 p-2 text-center print:text-sm"
-                    >
-                      {getCourseDetails(slot)}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="flex justify-center space-x-6 text-xs sm:text-sm print:hidden">
+
+      <div className="flex justify-center space-x-6 text-xs sm:text-sm">
         <button
           onClick={handleExportAsImage}
           className="bg-green-500 text-white font-semibold px-6 py-3 rounded hover:bg-green-600"
@@ -146,8 +155,8 @@ const ViewTimetable = ({ courses = [] }) => {
             }
             #timetable {
               position: absolute;
-              left: 0;
               top: 0;
+              left: 0;
               width: 100%;
             }
           }
