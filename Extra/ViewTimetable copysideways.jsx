@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { toPng } from "html-to-image";
-import { ImSpoonKnife } from "react-icons/im";
 
 const ViewTimetable = ({ courses = [] }) => {
   const slots = [
@@ -29,11 +28,9 @@ const ViewTimetable = ({ courses = [] }) => {
     const course = courses.find((course) => course.slot === slot);
     return course ? (
       <div className="flex flex-col">
-        <span className="border-b border-gray-400 py-1">
-          {course.code} - {slot}
-        </span>
-        <span className="border-b border-gray-400 py-1">{course.alias}</span>
-        <span className="py-1">{course.venue}</span>
+        <span className="border-b border-gray-400 py-2">{course.code} - {slot}</span>
+        <span className="border-b border-gray-400 py-2">{course.alias}</span>
+        <span className="py-2">{course.venue}</span>
       </div>
     ) : (
       <span>{slot}</span>
@@ -104,12 +101,14 @@ const ViewTimetable = ({ courses = [] }) => {
                     return dayIndex === 0 ? (
                       <td
                         key={slotIndex}
-                        className="min-w-[7.5rem] border border-gray-400 p-2 bg-slate-200"
+                        className="min-w-[7.5rem] border border-gray-400 p-2 text-center bg-slate-200 font-bold"
                         rowSpan={5}
+                        style={{
+                          writingMode: "sideways-lr",
+                          textOrientation: "mixed",
+                        }}
                       >
-                        <div className="flex justify-center items-center">
-                          <ImSpoonKnife className="text-4xl" />
-                        </div>
+                        Lunch Break
                       </td>
                     ) : null;
                   }
