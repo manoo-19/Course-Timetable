@@ -119,6 +119,19 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
     setVenue("");
   };
 
+  const QuerySearcher = (query) => {
+    const trimmedValue = query.target.value.trim();
+    setSearchQuery(trimmedValue);
+  };
+
+  const handleCancelModal = () => {
+    setIsModalOpen(false);
+    setCourseToAdd(null);
+    setCourseToUpdate(null);
+    setAliasCourseName("");
+    setVenue("");
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-6">
       {/* Registered Courses */}
@@ -195,7 +208,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             type="text"
             placeholder="Enter Course Code or Name"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={QuerySearcher}
             className="p-2 border rounded-md w-full text-sm text-center sm:text-left"
           />
           <button
@@ -297,7 +310,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
 
             <div className="flex justify-center gap-4">
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={handleCancelModal}
                 className="bg-gray-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 Cancel
