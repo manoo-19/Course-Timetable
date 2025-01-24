@@ -154,7 +154,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   return (
     <div className="flex flex-col items-center justify-center gap-6">
       {/* Registered Courses */}
-      <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg py-4 px-3">
+      <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg p-4">
         <h3 className="text-base sm:text-lg font-medium mb-4">
           Registered Courses
         </h3>
@@ -204,7 +204,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
                       <button
                         onClick={() => handleUpdateCourse(course)}
-                        className="bg-red-500 text-white text-xs px-3 py-2 rounded-md hover:bg-red-600"
+                        className="bg-red-500 text-white text-xs px-4 py-2 rounded-md hover:bg-red-600"
                       >
                         Edit
                       </button>
@@ -220,7 +220,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       </div>
 
       {/* Search Bar */}
-      <div className="w-full overflow-x-auto border border-gray-200 bg-white shadow-md rounded-lg py-4 px-3">
+      <div className="w-full overflow-x-auto border border-gray-200 bg-white shadow-md rounded-lg p-4">
         <h3 className="text-base sm:text-lg font-medium mb-4">Add a Course</h3>
         <div className="flex flex-col sm:flex-row items-center gap-4 max-w-md mx-auto">
           <input
@@ -237,7 +237,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
           />
           <button
             onClick={handleSearch}
-            className="bg-blue-500 text-white text-xs sm:text-sm px-5 py-2 rounded-md hover:bg-blue-600"
+            className="bg-blue-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -273,7 +273,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
 
       {/* Search Results */}
       {showResults && (
-        <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg py-4 px-3">
+        <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg p-4">
           <h3 className="text-base sm:text-lg font-medium mb-4">
             Search Results
           </h3>
@@ -311,7 +311,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                       <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
                         <button
                           onClick={() => handleAddCourse(course)}
-                          className="bg-green-500 text-white text-xs px-3 py-2 rounded-md hover:bg-green-600"
+                          className="bg-green-500 text-white text-xs px-4 py-2 rounded-md hover:bg-green-600"
                         >
                           Add
                         </button>
