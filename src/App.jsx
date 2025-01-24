@@ -25,7 +25,7 @@ const App = () => {
   };
 
   return (
-    <div className="mt-10 w-[93%] max-w-6xl mx-auto">
+    <div className="my-10 w-[93%] max-w-6xl mx-auto">
       <div className="bg-slate-100 p-5 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-center mb-6 underline">
           Course Timetable
