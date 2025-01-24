@@ -25,9 +25,12 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center">
-      <div className="text-center bg-slate-100 p-5 rounded-lg w-[93%] max-w-6xl my-10">
-        <div className="flex justify-center mb-6 space-x-6 text-lg">
+    <div className="mt-10 w-[93%] max-w-6xl mx-auto">
+      <div className="bg-slate-100 p-5 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold text-center mb-6 underline">
+          Course Timetable
+        </h1>
+        <div className="flex justify-center mb-6 space-x-6 text-center">
           <button
             onClick={() => setView("manage")}
             className={`px-6 py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${

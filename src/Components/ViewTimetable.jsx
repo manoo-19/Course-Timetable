@@ -111,7 +111,7 @@ const ViewTimetable = ({ courses = [] }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 text-center">
       {courses.length > 0 && (
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full">
           {/* Toggle for Course Code */}
@@ -168,7 +168,7 @@ const ViewTimetable = ({ courses = [] }) => {
                   <th
                     key={index}
                     scope="col"
-                    className="min-w-[7.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 text-center"
+                    className="min-w-[7.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2"
                   >
                     {time}
                   </th>
@@ -178,7 +178,7 @@ const ViewTimetable = ({ courses = [] }) => {
             <tbody>
               {days.map((day, dayIndex) => (
                 <tr key={dayIndex} className="odd:bg-white even:bg-slate-300">
-                  <td className="min-w-[4rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 font-semibold text-center">
+                  <td className="min-w-[4rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 font-semibold">
                     {day}
                   </td>
                   {timetable[dayIndex].map((slot, slotIndex) => {
@@ -201,7 +201,7 @@ const ViewTimetable = ({ courses = [] }) => {
                     return (
                       <td
                         key={slotIndex}
-                        className="min-w-[7.5rem] border text-xs sm:text-sm border-slate-50 p-2 text-center"
+                        className="min-w-[7.5rem] border text-xs sm:text-sm border-slate-50 p-2"
                         style={{ backgroundColor: color }}
                       >
                         {getCourseDetails(slot)}

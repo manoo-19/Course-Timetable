@@ -152,7 +152,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6">
+    <div className="flex flex-col items-center justify-center gap-6 text-center">
       {/* Registered Courses */}
       <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg p-4">
         <h3 className="text-base sm:text-lg font-medium mb-4">
@@ -186,22 +186,22 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               <tbody>
                 {courses.map((course, index) => (
                   <tr key={index} className="odd:bg-white even:bg-slate-200">
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       {course.code}
                     </td>
-                    <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       {course.name}
                     </td>
-                    <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       {course.alias}
                     </td>
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       {course.slot}
                     </td>
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       {course.venue}
                     </td>
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                       <button
                         onClick={() => handleUpdateCourse(course)}
                         className="bg-red-500 text-white text-xs px-4 py-2 rounded-md hover:bg-red-600"
@@ -233,7 +233,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 handleSearch();
               }
             }}
-            className="p-2 border rounded-md w-full text-sm text-center sm:text-left"
+            className="p-2 border rounded-md w-full text-sm sm:text-left"
           />
           <button
             onClick={handleSearch}
@@ -299,16 +299,16 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 <tbody>
                   {filteredCourses.map((course, index) => (
                     <tr key={index} className="odd:bg-white even:bg-slate-200">
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                         {course.code}
                       </td>
-                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                         {course.name}
                       </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
                         {course.slot}
                       </td>
-                      <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400 text-center">
+                      <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400">
                         <button
                           onClick={() => handleAddCourse(course)}
                           className="bg-green-500 text-white text-xs px-4 py-2 rounded-md hover:bg-green-600"
@@ -321,7 +321,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 </tbody>
               </table>
             ) : (
-              <p className="text-gray-500 text-sm text-center">
+              <p className="text-gray-500 text-sm">
                 No courses found for your search query.
               </p>
             )}
