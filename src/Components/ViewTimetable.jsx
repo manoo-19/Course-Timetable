@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import { toPng } from "html-to-image";
 import { ImSpoonKnife } from "react-icons/im";
+import { toPng } from "html-to-image";
 
 const ViewTimetable = ({ courses = [] }) => {
   const slots = [
@@ -51,9 +51,10 @@ const ViewTimetable = ({ courses = [] }) => {
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-  const timetableRef = useRef(null);
   const [showCourseCode, setShowCourseCode] = useState(false);
   const [showVenue, setShowVenue] = useState(false);
+
+  const timetableRef = useRef(null);
 
   const getCourseDetails = (slot) => {
     const course = courses.find((course) => course.slot === slot);
@@ -92,8 +93,12 @@ const ViewTimetable = ({ courses = [] }) => {
       const dataUrl = await toPng(timetableElement, {
         backgroundColor: "white",
         cacheBust: true,
-        width: timetableElement.scrollWidth,
-        height: timetableElement.scrollHeight,
+        pixelRatio: 2,
+        width: timetableElement.scrollWidth + 32,
+        height: timetableElement.scrollHeight + 32,
+        style: {
+          padding: "16px",
+        },
       });
 
       const link = document.createElement("a");
@@ -101,60 +106,58 @@ const ViewTimetable = ({ courses = [] }) => {
       link.href = dataUrl;
       link.click();
     } catch (error) {
-      console.error("Failed to export timetable as image:", error);
+      console.error("Error exporting timetable as image:", error);
     }
-  };
-
-  const handlePrint = () => {
-    window.print();
   };
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full">
-        {/* Toggle for Course Code */}
-        <label
-          htmlFor="toggleCourseCode"
-          className="flex items-center justify-between min-w-52 sm:min-w-44 space-x-3 scale-90 sm:scale-100"
-        >
-          <span className="text-sm">Show Course Code</span>
-          <div className="relative w-10 h-6">
-            <input
-              id="toggleCourseCode"
-              type="checkbox"
-              checked={showCourseCode}
-              onChange={(e) => setShowCourseCode(e.target.checked)}
-              className="absolute opacity-0 w-0 h-0 peer"
-              aria-label="Toggle Course Code"
-            />
-            <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
-            <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
-          </div>
-        </label>
+      {courses.length > 0 && (
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full">
+          {/* Toggle for Course Code */}
+          <label
+            htmlFor="toggleCourseCode"
+            className="flex items-center justify-between min-w-52 sm:min-w-44 space-x-3 scale-90 sm:scale-100"
+          >
+            <span className="text-sm">Show Course Code</span>
+            <div className="relative w-10 h-6">
+              <input
+                id="toggleCourseCode"
+                type="checkbox"
+                checked={showCourseCode}
+                onChange={(e) => setShowCourseCode(e.target.checked)}
+                className="absolute opacity-0 w-0 h-0 peer"
+                aria-label="Toggle Course Code"
+              />
+              <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
+            </div>
+          </label>
 
-        {/* Toggle for Venue */}
-        <label
-          htmlFor="toggleVenue"
-          className="flex items-center justify-between min-w-52 sm:min-w-44 space-x-3 scale-90 sm:scale-100"
-        >
-          <span className="text-sm">Show Course Venue</span>
-          <div className="relative w-10 h-6">
-            <input
-              id="toggleVenue"
-              type="checkbox"
-              checked={showVenue}
-              onChange={(e) => setShowVenue(e.target.checked)}
-              className="absolute opacity-0 w-0 h-0 peer"
-              aria-label="Toggle Course Venue"
-            />
-            <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
-            <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
-          </div>
-        </label>
-      </div>
+          {/* Toggle for Venue */}
+          <label
+            htmlFor="toggleVenue"
+            className="flex items-center justify-between min-w-52 sm:min-w-44 space-x-3 scale-90 sm:scale-100"
+          >
+            <span className="text-sm">Show Course Venue</span>
+            <div className="relative w-10 h-6">
+              <input
+                id="toggleVenue"
+                type="checkbox"
+                checked={showVenue}
+                onChange={(e) => setShowVenue(e.target.checked)}
+                className="absolute opacity-0 w-0 h-0 peer"
+                aria-label="Toggle Course Venue"
+              />
+              <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
+            </div>
+          </label>
+        </div>
+      )}
 
       <div className="bg-white p-4 shadow-md rounded-lg">
-        <div id="timetable" ref={timetableRef} className="overflow-auto">
+        <div ref={timetableRef} className="overflow-x-auto">
           <table className="table-auto w-full border-collapse">
             <thead>
               <tr>
@@ -219,35 +222,7 @@ const ViewTimetable = ({ courses = [] }) => {
         >
           Export as Image
         </button>
-        <button
-          onClick={handlePrint}
-          className="bg-blue-500 text-white font-semibold px-6 py-3 rounded hover:bg-blue-600"
-        >
-          Print Timetable
-        </button>
       </div>
-      <style>
-        {`
-          @media print {
-            @page {
-              size: landscape;
-              margin: 1cm;
-            }
-            body * {
-              visibility: hidden;
-            }
-            #timetable, #timetable * {
-              visibility: visible;
-            }
-            #timetable {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
