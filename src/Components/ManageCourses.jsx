@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
+
+const SHEET_ID = "1apYfEYaxMiX5nfVz9MOu7qz-5K5r_uiIvwRBJ3R2t58";
+const API_KEY = "AIzaSyDy9bQ6gBkew1Doqyg6IilrwntZtfdj39M";
+const RANGE = "data";
 
 const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,16 +26,46 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
 
     const trimmedSearchQuery = searchQuery.trim();
     setIsLoading(true);
+
     try {
-      const response = await fetch(
-        `https://script.google.com/macros/s/AKfycbwyl2f67XNgQAUJejU3GO-6tnLF818k8AHku5XyGdeQgD9ysP8CtUFkUudKSOoJxfA/exec?query=${encodeURIComponent(
-          trimmedSearchQuery
-        )}`
+      const response = await axios.get(
+        `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`
       );
-      const data = await response.json();
-      setFilteredCourses(data.courses || []);
+
+      const rows = response.data.values || [];
+      const searchTerm = trimmedSearchQuery.toLowerCase();
+
+      const headers = rows[0] || []; // First row contains the headers
+      const courseCodeIndex = headers.findIndex((header) =>
+        header.toLowerCase().includes("course code")
+      );
+      const courseNameIndex = headers.findIndex((header) =>
+        header.toLowerCase().includes("course name")
+      );
+      const courseSlotIndex = headers.findIndex((header) =>
+        header.toLowerCase().includes("slot")
+      );
+
+      const filteredResults = rows.slice(1).filter((row) => {
+        const courseCode = row[courseCodeIndex]?.toString().toLowerCase() || "";
+        const courseName = row[courseNameIndex]?.toString().toLowerCase() || "";
+        return (
+          courseCode.includes(searchTerm) || courseName.includes(searchTerm)
+        );
+      });
+
+      const formattedResults = filteredResults.map((row) => ({
+        code: row[courseCodeIndex] || "N/A",
+        name: row[courseNameIndex] || "N/A",
+        slot: row[courseSlotIndex] || "N/A",
+      }));
+
+      setFilteredCourses(formattedResults);
     } catch (error) {
-      console.error("Error fetching courses:", error);
+      console.error(
+        "Error fetching data from Google Sheets:",
+        error.response?.data || error.message
+      );
       alert("Failed to fetch courses. Please try again.");
     } finally {
       setShowResults(true);
@@ -52,8 +87,13 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
     const trimmedAliasCourseName = aliasCourseName.trim();
     const trimmedVenue = venue.trim().toUpperCase();
 
+    if (!trimmedAliasCourseName || !trimmedVenue) {
+      alert("Please fill in all the fields.");
+      return;
+    }
+
     const isAliasExist = courses.some(
-      (c) => c.alias === trimmedAliasCourseName
+      (c) => c.alias === trimmedAliasCourseName && c !== courseToUpdate
     );
 
     if (isAliasExist) {
