@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const SHEET_ID = "1apYfEYaxMiX5nfVz9MOu7qz-5K5r_uiIvwRBJ3R2t58";
-const API_KEY = "AIzaSyDy9bQ6gBkew1Doqyg6IilrwntZtfdj39M";
-const RANGE = "data";
+const SHEET_ID = import.meta.env.VITE_SHEET_ID;
+const API_KEY = import.meta.env.VITE_API_KEY;
+const RANGE = import.meta.env.VITE_RANGE;
 
 const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   const [searchQuery, setSearchQuery] = useState("");
