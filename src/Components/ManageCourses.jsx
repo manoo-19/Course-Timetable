@@ -192,7 +192,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 text-center">
+    <div className="flex flex-col items-center justify-center gap-6 text-center text-neutral-300">
       {/* Registered Courses */}
       <div className="w-full">
         <h3 className="text-base sm:text-lg font-medium mb-4">
@@ -203,23 +203,23 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             <div className="overflow-x-auto">
               <table className="table-auto w-full">
                 <thead>
-                  <tr className="bg-slate-300">
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                  <tr className="bg-[#121212]">
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Course Code
                     </th>
-                    <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                    <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Course Name
                     </th>
-                    <th className="min-w-[5.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                    <th className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Alias Name
                     </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Course Slot
                     </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Venue
                     </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Actions
                     </th>
                   </tr>
@@ -228,27 +228,27 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                   {courses.map((course, index) => (
                     <tr
                       key={index}
-                      className="odd:bg-slate-50 even:bg-slate-300"
+                      className="odd:bg-[#1E1E1E] even:bg-[#121212]"
                     >
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.code}
                       </td>
-                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.name}
                       </td>
-                      <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.alias}
                       </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.slot}
                       </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.venue}
                       </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         <button
                           onClick={() => handleUpdateCourse(course)}
-                          className="bg-red-500 text-slate-100 text-xs px-4 py-2 rounded-md hover:bg-red-600"
+                          className="bg-red-500 text-xs px-4 py-2 rounded-md hover:bg-red-600 font-semibold"
                         >
                           Edit
                         </button>
@@ -260,11 +260,11 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             </div>
           </div>
         ) : (
-          <p className="text-gray-500 text-sm">No courses registered yet.</p>
+          <p className="text-neutral-500 text-sm">No courses registered yet.</p>
         )}
       </div>
 
-      <hr className="w-3/4 border-t border-slate-400" />
+      <hr className="w-3/4 border-t border-neutral-300" />
 
       {/* Search Bar */}
       <div className="w-full">
@@ -280,11 +280,11 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 handleSearch();
               }
             }}
-            className="p-2 rounded-md w-full text-sm sm:text-left bg-slate-50 border-2 border-slate-200 focus:border-2 focus:border-slate-400 focus:outline-none"
+            className="p-2 rounded-md w-full text-sm sm:text-left bg-[#121212] border border-neutral-300 focus:border focus:border-neutral-400 focus:outline-none"
           />
           <button
             onClick={handleSearch}
-            className="bg-blue-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-blue-500 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -318,7 +318,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
         </div>
       </div>
 
-      {showResults && <hr className="w-3/4 border-t border-slate-400" />}
+      {showResults && <hr className="w-3/4 border-t border-neutral-300" />}
 
       {/* Search Results */}
       {showResults && (
@@ -331,17 +331,17 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               <div className="overflow-x-auto">
                 <table className="table-auto w-full">
                   <thead>
-                    <tr className="bg-slate-300">
-                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                    <tr className="bg-[#121212]">
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Course Code
                       </th>
-                      <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Course Name
                       </th>
-                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Course Slot
                       </th>
-                      <th className="min-w-[4rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      <th className="min-w-[4rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Actions
                       </th>
                     </tr>
@@ -350,21 +350,21 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     {filteredCourses.map((course, index) => (
                       <tr
                         key={index}
-                        className="odd:bg-slate-50 even:bg-slate-300"
+                        className="odd:bg-[#1E1E1E] even:bg-[#121212]"
                       >
-                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           {course.code}
                         </td>
-                        <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           {course.name}
                         </td>
-                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           {course.slot}
                         </td>
-                        <td className="min-w-[4rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           <button
                             onClick={() => handleAddCourse(course)}
-                            className="bg-green-500 text-slate-100 text-xs px-4 py-2 rounded-md hover:bg-green-600"
+                            className="bg-green-600 text-xs px-4 py-2 rounded-md hover:bg-green-700 font-semibold"
                           >
                             Add
                           </button>
@@ -376,7 +376,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               </div>
             </div>
           ) : (
-            <p className="text-gray-500 text-sm">
+            <p className="text-neutral-500 text-sm">
               No courses found for your search query.
             </p>
           )}
@@ -386,7 +386,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       {/* Modal to Edit Course Name and Add Venue */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
-          <div className="bg-slate-100 p-6 rounded-md w-[93%] max-w-sm">
+          <div className="bg-neutral-800 p-6 rounded-md w-[93%] max-w-sm">
             <h3 className="text-lg font-medium mb-6">
               {addOrDrop === "add" ? "Add Course" : "Update Course"}
             </h3>
@@ -398,7 +398,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 type="text"
                 value={aliasCourseName}
                 onChange={(e) => setAliasCourseName(e.target.value)}
-                className="p-2 rounded-md w-full text-sm sm:text-left bg-slate-50 border-2 border-slate-200 focus:border-2 focus:border-slate-400 focus:outline-none"
+                className="p-2 rounded-md w-full text-sm sm:text-left bg-[#121212] border border-neutral-300 focus:border focus:border-neutral-400 focus:outline-none"
               />
             </div>
 
@@ -410,14 +410,14 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 type="text"
                 value={venue}
                 onChange={(e) => setVenue(e.target.value)}
-                className="p-2 rounded-md w-full text-sm sm:text-left bg-slate-50 border-2 border-slate-200 focus:border-2 focus:border-slate-400 focus:outline-none"
+                className="p-2 rounded-md w-full text-sm sm:text-left bg-[#121212] border border-neutral-300 focus:border focus:border-neutral-400 focus:outline-none"
               />
             </div>
 
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleCancelModal}
-                className="bg-gray-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-gray-600"
+                className="bg-[#121212] text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-neutral-950 font-semibold"
               >
                 Cancel
               </button>
@@ -428,7 +428,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     ? handleConfirmAddCourse
                     : handleConfirmUpdateCourse
                 }
-                className="bg-green-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-green-600"
+                className="bg-green-600 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-green-700 font-semibold"
               >
                 {addOrDrop === "add" ? "Add" : "Update"}
               </button>
@@ -436,7 +436,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               {addOrDrop === "update" && (
                 <button
                   onClick={handleConfirmRemoveCourse}
-                  className="bg-red-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-red-600"
+                  className="bg-red-500 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-red-600 font-semibold"
                 >
                   Drop
                 </button>

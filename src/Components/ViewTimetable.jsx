@@ -21,7 +21,7 @@ const ViewTimetable = ({ courses = [] }) => {
     ["E", "F", "D", "G", " ", "S", "R"],
   ];
 
-  const dslotColors = [
+  const slotColors = [
     { slot: "A", color: "#AF3029" }, // Red-600
     { slot: "B", color: "#BC5215" }, // Orange-600
     { slot: "C", color: "#AD8301" }, // Yellow-600
@@ -35,7 +35,7 @@ const ViewTimetable = ({ courses = [] }) => {
     { slot: "S", color: "#94776d" }, // Wood-600
   ];
 
-  const slotColors = [
+  const lslotColors = [
     { slot: "A", color: "#D14D41" }, // Red-400
     { slot: "B", color: "#DA702C" }, // Orange-400
     { slot: "C", color: "#D0A215" }, // Yellow-400
@@ -113,7 +113,7 @@ const ViewTimetable = ({ courses = [] }) => {
   return (
     <div className="flex flex-col gap-6 text-center">
       {courses.length > 0 && (
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full text-neutral-300">
           {/* Toggle for Course Code */}
           <label
             htmlFor="toggleCourseCode"
@@ -129,8 +129,8 @@ const ViewTimetable = ({ courses = [] }) => {
                 className="absolute opacity-0 w-0 h-0 peer"
                 aria-label="Toggle Course Code"
               />
-              <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
-              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-50 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
+              <span className="block w-full h-full bg-[#121212] rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-neutral-300 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
             </div>
           </label>
 
@@ -149,26 +149,26 @@ const ViewTimetable = ({ courses = [] }) => {
                 className="absolute opacity-0 w-0 h-0 peer"
                 aria-label="Toggle Course Venue"
               />
-              <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
-              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-50 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
+              <span className="block w-full h-full bg-[#121212] rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-neutral-300 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
             </div>
           </label>
         </div>
       )}
 
-      <div className="shadow-md rounded-lg">
+      <div className="shadow-md rounded-lg text-neutral-300">
         <div ref={timetableRef} className="overflow-x-auto">
           <table className="table-auto w-full">
             <thead>
               <tr>
-                <th className="min-w-[4rem] text-xs sm:text-sm bg-slate-300 border-2 border-slate-200 p-2">
+                <th className="min-w-[4rem] text-xs sm:text-sm bg-[#1E1E1E] border border-neutral-300 p-2">
                   Day
                 </th>
                 {slots.map((time, index) => (
                   <th
                     key={index}
                     scope="col"
-                    className="min-w-[7.5rem] text-xs sm:text-sm bg-slate-300 border-2 border-slate-200 p-2"
+                    className="min-w-[7.5rem] text-xs sm:text-sm bg-[#1E1E1E] border border-neutral-300 p-2"
                   >
                     {time}
                   </th>
@@ -177,8 +177,8 @@ const ViewTimetable = ({ courses = [] }) => {
             </thead>
             <tbody>
               {days.map((day, dayIndex) => (
-                <tr key={dayIndex} className="bg-slate-50">
-                  <td className="min-w-[4rem] text-xs sm:text-sm bg-slate-300 border-2 border-slate-200 p-2 font-semibold">
+                <tr key={dayIndex} className="bg-[#121212]">
+                  <td className="min-w-[4rem] text-xs sm:text-sm bg-[#1E1E1E] border border-neutral-300 p-2 font-semibold">
                     {day}
                   </td>
                   {timetable[dayIndex].map((slot, slotIndex) => {
@@ -186,7 +186,7 @@ const ViewTimetable = ({ courses = [] }) => {
                       return dayIndex === 0 ? (
                         <td
                           key={slotIndex}
-                          className="min-w-[7.5rem] bg-slate-300 border-2 border-slate-200 p-2"
+                          className="min-w-[7.5rem] bg-[#1E1E1E] border border-neutral-300 p-2"
                           rowSpan={5}
                         >
                           <div className="flex justify-center items-center">
@@ -207,8 +207,8 @@ const ViewTimetable = ({ courses = [] }) => {
                     return (
                       <td
                         key={slotIndex}
-                        className={`min-w-[7.5rem] text-xs sm:text-sm border-2 border-slate-200 p-2 ${
-                          courseExists ? "text-slate-50" : ""
+                        className={`min-w-[7.5rem] text-xs sm:text-sm border border-neutral-300 p-2 ${
+                          courseExists ? "text-neutral-300" : ""
                         }`}
                         style={{ backgroundColor: color }}
                       >

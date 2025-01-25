@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div className="my-10 w-[93%] max-w-6xl mx-auto">
-      <div className="bg-slate-100 p-5 rounded-lg shadow-md">
+      <div className="bg-neutral-800 text-neutral-300 p-5 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-center mb-6 underline">
           Course Timetable
         </h1>
@@ -35,8 +35,8 @@ const App = () => {
             onClick={() => setView("manage")}
             className={`px-6 py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
               view === "manage"
-                ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-slate-300 hover:bg-slate-400"
+                ? "bg-blue-500 hover:bg-blue-600"
+                : "bg-[#121212] hover:bg-neutral-950"
             }`}
           >
             Manage Courses
@@ -45,8 +45,8 @@ const App = () => {
             onClick={() => setView("timetable")}
             className={`px-6 py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
               view === "timetable"
-                ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-slate-300 hover:bg-slate-400"
+                ? "bg-blue-500 hover:bg-blue-600"
+                : "bg-[#121212] hover:bg-neutral-950"
             }`}
           >
             View Timetable
