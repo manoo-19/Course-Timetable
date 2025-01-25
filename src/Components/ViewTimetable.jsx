@@ -133,6 +133,7 @@ const ViewTimetable = ({ courses = [] }) => {
           alternatebackground: "bg-[#121212]",
           border: "border border-neutral-300",
           textColor: "text-neutral-300",
+          courseTextColor: "text-neutral-300",
         }
       : {
           container: "bg-slate-100",
@@ -140,6 +141,7 @@ const ViewTimetable = ({ courses = [] }) => {
           alternateBackground: "bg-slate-50",
           border: "border-2 border-slate-200",
           textColor: "text-black",
+          courseTextColor: "text-slate-50",
         };
 
   return (
@@ -255,7 +257,7 @@ const ViewTimetable = ({ courses = [] }) => {
                         key={slotIndex}
                         className={`min-w-[7.5rem] text-xs sm:text-sm ${
                           themeClasses.border
-                        } p-2 ${courseExists ? themeClasses.bodyText : ""}`}
+                        } p-2 ${courseExists ? themeClasses.courseTextColor : ""}`}
                         style={{ backgroundColor: color }}
                       >
                         {getCourseDetails(slot)}
