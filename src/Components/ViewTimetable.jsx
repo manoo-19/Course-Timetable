@@ -59,7 +59,7 @@ const ViewTimetable = ({ courses = [] }) => {
   const getCourseDetails = (slot) => {
     const course = courses.find((course) => course.slot === slot);
     return course ? (
-      <div className="flex flex-col text-white font-medium">
+      <div className="flex flex-col font-medium">
         {showCourseCode && (
           <div className="flex flex-col items-center gap-1">
             <span>
@@ -77,7 +77,7 @@ const ViewTimetable = ({ courses = [] }) => {
         )}
       </div>
     ) : (
-      <span className="text-white font-medium">{slot}</span>
+      <span className="font-medium">{slot}</span>
     );
   };
 
@@ -130,7 +130,7 @@ const ViewTimetable = ({ courses = [] }) => {
                 aria-label="Toggle Course Code"
               />
               <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
-              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-50 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
             </div>
           </label>
 
@@ -150,25 +150,25 @@ const ViewTimetable = ({ courses = [] }) => {
                 aria-label="Toggle Course Venue"
               />
               <span className="block w-full h-full bg-slate-300 rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
-              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-50 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
             </div>
           </label>
         </div>
       )}
 
-      <div className="bg-white p-4 shadow-md rounded-lg">
+      <div className="shadow-md rounded-lg">
         <div ref={timetableRef} className="overflow-x-auto">
-          <table className="table-auto w-full border-collapse">
+          <table className="table-auto w-full">
             <thead>
               <tr>
-                <th className="min-w-[4rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2">
+                <th className="min-w-[4rem] text-xs sm:text-sm bg-slate-300 border-2 border-slate-200 p-2">
                   Day
                 </th>
                 {slots.map((time, index) => (
                   <th
                     key={index}
                     scope="col"
-                    className="min-w-[7.5rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2"
+                    className="min-w-[7.5rem] text-xs sm:text-sm bg-slate-300 border-2 border-slate-200 p-2"
                   >
                     {time}
                   </th>
@@ -177,8 +177,8 @@ const ViewTimetable = ({ courses = [] }) => {
             </thead>
             <tbody>
               {days.map((day, dayIndex) => (
-                <tr key={dayIndex} className="odd:bg-white even:bg-slate-300">
-                  <td className="min-w-[4rem] border text-xs sm:text-sm bg-slate-300 border-slate-50 p-2 font-semibold">
+                <tr key={dayIndex} className="bg-slate-50">
+                  <td className="min-w-[4rem] text-xs sm:text-sm bg-slate-300 border-2 border-slate-200 p-2 font-semibold">
                     {day}
                   </td>
                   {timetable[dayIndex].map((slot, slotIndex) => {
@@ -186,7 +186,7 @@ const ViewTimetable = ({ courses = [] }) => {
                       return dayIndex === 0 ? (
                         <td
                           key={slotIndex}
-                          className="min-w-[7.5rem] border border-slate-50 p-2 bg-slate-300"
+                          className="min-w-[7.5rem] bg-slate-300 border-2 border-slate-200 p-2"
                           rowSpan={5}
                         >
                           <div className="flex justify-center items-center">
@@ -195,13 +195,21 @@ const ViewTimetable = ({ courses = [] }) => {
                         </td>
                       ) : null;
                     }
-                    const color =
-                      slotColors.find((color) => color.slot === slot)?.color ||
-                      "#64748b";
+
+                    const courseExists = courses.some(
+                      (course) => course.slot === slot
+                    );
+                    
+                    const color = courseExists
+                      ? slotColors.find((color) => color.slot === slot)?.color
+                      : "";
+
                     return (
                       <td
                         key={slotIndex}
-                        className="min-w-[7.5rem] border text-xs sm:text-sm border-slate-50 p-2"
+                        className={`min-w-[7.5rem] text-xs sm:text-sm border-2 border-slate-200 p-2 ${
+                          courseExists ? "text-slate-50" : ""
+                        }`}
                         style={{ backgroundColor: color }}
                       >
                         {getCourseDetails(slot)}

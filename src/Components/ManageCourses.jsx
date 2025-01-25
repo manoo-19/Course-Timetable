@@ -194,73 +194,77 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   return (
     <div className="flex flex-col items-center justify-center gap-6 text-center">
       {/* Registered Courses */}
-      <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg p-4">
+      <div className="w-full">
         <h3 className="text-base sm:text-lg font-medium mb-4">
           Registered Courses
         </h3>
-        <div className="overflow-x-auto">
-          {courses.length > 0 ? (
-            <table className="table-auto w-full h-full border border-gray-500">
-              <thead>
-                <tr className="bg-slate-200">
-                  <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                    Course Code
-                  </th>
-                  <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                    Course Name
-                  </th>
-                  <th className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                    Alias Name
-                  </th>
-                  <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                    Course Slot
-                  </th>
-                  <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                    Venue
-                  </th>
-                  <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {courses.map((course, index) => (
-                  <tr key={index} className="odd:bg-white even:bg-slate-200">
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      {course.code}
-                    </td>
-                    <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      {course.name}
-                    </td>
-                    <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      {course.alias}
-                    </td>
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      {course.slot}
-                    </td>
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      {course.venue}
-                    </td>
-                    <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      <button
-                        onClick={() => handleUpdateCourse(course)}
-                        className="bg-red-500 text-white text-xs px-4 py-2 rounded-md hover:bg-red-600"
-                      >
-                        Edit
-                      </button>
-                    </td>
+        {courses.length > 0 ? (
+          <div className="shadow-md rounded-lg">
+            <div className="overflow-x-auto">
+              <table className="table-auto w-full">
+                <thead>
+                  <tr className="bg-slate-300">
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      Course Code
+                    </th>
+                    <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      Course Name
+                    </th>
+                    <th className="min-w-[5.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      Alias Name
+                    </th>
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      Course Slot
+                    </th>
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      Venue
+                    </th>
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p className="text-gray-500 text-sm">No courses registered yet.</p>
-          )}
-        </div>
+                </thead>
+                <tbody>
+                  {courses.map((course, index) => (
+                    <tr key={index} className="odd:bg-slate-50 even:bg-slate-300">
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        {course.code}
+                      </td>
+                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        {course.name}
+                      </td>
+                      <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        {course.alias}
+                      </td>
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        {course.slot}
+                      </td>
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        {course.venue}
+                      </td>
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        <button
+                          onClick={() => handleUpdateCourse(course)}
+                          className="bg-red-500 text-white text-xs px-4 py-2 rounded-md hover:bg-red-600"
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <p className="text-gray-500 text-sm">No courses registered yet.</p>
+        )}
       </div>
 
+      <hr className="w-3/4 border-t border-slate-400" />
+
       {/* Search Bar */}
-      <div className="w-full overflow-x-auto border border-gray-200 bg-white shadow-md rounded-lg p-4">
+      <div className="w-full">
         <h3 className="text-base sm:text-lg font-medium mb-4">Add a Course</h3>
         <div className="flex flex-col sm:flex-row items-center gap-4 max-w-md mx-auto">
           <input
@@ -273,7 +277,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 handleSearch();
               }
             }}
-            className="p-2 border rounded-md w-full text-sm sm:text-left"
+            className="p-2 rounded-md w-full text-sm sm:text-left bg-slate-50 border-2 border-slate-200 focus:border-2 focus:border-slate-400 focus:outline-none"
           />
           <button
             onClick={handleSearch}
@@ -311,61 +315,68 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
         </div>
       </div>
 
+      {showResults && <hr className="w-3/4 border-t border-slate-400" />}
+
       {/* Search Results */}
       {showResults && (
-        <div className="w-full border border-gray-200 bg-white shadow-md rounded-lg p-4">
+        <div className="w-full">
           <h3 className="text-base sm:text-lg font-medium mb-4">
             Search Results
           </h3>
-          <div className="overflow-x-auto">
-            {filteredCourses.length > 0 ? (
-              <table className="table-auto w-full border border-gray-500">
-                <thead>
-                  <tr className="bg-slate-200">
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Course Code
-                    </th>
-                    <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Course Name
-                    </th>
-                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Course Slot
-                    </th>
-                    <th className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredCourses.map((course, index) => (
-                    <tr key={index} className="odd:bg-white even:bg-slate-200">
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                        {course.code}
-                      </td>
-                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                        {course.name}
-                      </td>
-                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-gray-400">
-                        {course.slot}
-                      </td>
-                      <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-gray-400">
-                        <button
-                          onClick={() => handleAddCourse(course)}
-                          className="bg-green-500 text-white text-xs px-4 py-2 rounded-md hover:bg-green-600"
-                        >
-                          Add
-                        </button>
-                      </td>
+          {filteredCourses.length > 0 ? (
+            <div className="shadow-md rounded-lg">
+              <div className="overflow-x-auto">
+                <table className="table-auto w-full">
+                  <thead>
+                    <tr className="bg-slate-300">
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        Course Code
+                      </th>
+                      <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        Course Name
+                      </th>
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        Course Slot
+                      </th>
+                      <th className="min-w-[4rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                        Actions
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p className="text-gray-500 text-sm">
-                No courses found for your search query.
-              </p>
-            )}
-          </div>
+                  </thead>
+                  <tbody>
+                    {filteredCourses.map((course, index) => (
+                      <tr
+                        key={index}
+                        className="odd:bg-slate-50 even:bg-slate-300"
+                      >
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                          {course.code}
+                        </td>
+                        <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                          {course.name}
+                        </td>
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                          {course.slot}
+                        </td>
+                        <td className="min-w-[4rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
+                          <button
+                            onClick={() => handleAddCourse(course)}
+                            className="bg-green-500 text-white text-xs px-4 py-2 rounded-md hover:bg-green-600"
+                          >
+                            Add
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            <p className="text-gray-500 text-sm">
+              No courses found for your search query.
+            </p>
+          )}
         </div>
       )}
 
