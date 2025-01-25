@@ -1,10 +1,8 @@
 import React, { useRef, useState } from "react";
 import { ImSpoonKnife } from "react-icons/im";
 import { toPng } from "html-to-image";
-import { useTheme } from "./ThemeContext";
 
 const ViewTimetable = ({ courses = [] }) => {
-  const { theme } = useTheme();
   const slots = [
     "9:00 - 9:55",
     "10:00 - 10:55",
@@ -23,7 +21,7 @@ const ViewTimetable = ({ courses = [] }) => {
     ["E", "F", "D", "G", " ", "S", "R"],
   ];
 
-  const darkSlotColors = [
+  const slotColors = [
     { slot: "A", color: "#AF3029" }, // Red-600
     { slot: "B", color: "#BC5215" }, // Orange-600
     { slot: "C", color: "#AD8301" }, // Yellow-600
@@ -37,7 +35,7 @@ const ViewTimetable = ({ courses = [] }) => {
     { slot: "S", color: "#94776d" }, // Wood-600
   ];
 
-  const lightSlotColors = [
+  const lslotColors = [
     { slot: "A", color: "#D14D41" }, // Red-400
     { slot: "B", color: "#DA702C" }, // Orange-400
     { slot: "C", color: "#D0A215" }, // Yellow-400
@@ -112,42 +110,10 @@ const ViewTimetable = ({ courses = [] }) => {
     }
   };
 
-  const slotColors = theme === "dark" ? darkSlotColors : lightSlotColors;
-
-  const toggle =
-    theme === "dark"
-      ? {
-          bg: "bg-[#121212]",
-          circle: "bg-neutral-300",
-        }
-      : {
-          bg: "bg-slate-300",
-          circle: "bg-slate-50",
-        };
-
-  const themeClasses =
-    theme === "dark"
-      ? {
-          container: "bg-neutral-800",
-          background: "bg-[#1E1E1E]",
-          alternatebackground: "bg-[#121212]",
-          border: "border border-neutral-300",
-          textColor: "text-neutral-300",
-        }
-      : {
-          container: "bg-slate-100",
-          background: "bg-slate-300",
-          alternateBackground: "bg-slate-50",
-          border: "border-2 border-slate-200",
-          textColor: "text-black",
-        };
-
   return (
     <div className="flex flex-col gap-6 text-center">
       {courses.length > 0 && (
-        <div
-          className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full ${themeClasses.textColor}`}
-        >
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full text-neutral-300">
           {/* Toggle for Course Code */}
           <label
             htmlFor="toggleCourseCode"
@@ -163,12 +129,8 @@ const ViewTimetable = ({ courses = [] }) => {
                 className="absolute opacity-0 w-0 h-0 peer"
                 aria-label="Toggle Course Code"
               />
-              <span
-                className={`block w-full h-full ${toggle.bg} rounded-full peer-checked:bg-green-500 transition-colors duration-300`}
-              ></span>
-              <span
-                className={`absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 ${toggle.circle} rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300`}
-              ></span>
+              <span className="block w-full h-full bg-[#121212] rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-neutral-300 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
             </div>
           </label>
 
@@ -187,32 +149,26 @@ const ViewTimetable = ({ courses = [] }) => {
                 className="absolute opacity-0 w-0 h-0 peer"
                 aria-label="Toggle Course Venue"
               />
-              <span
-                className={`block w-full h-full ${toggle.bg} rounded-full peer-checked:bg-green-500 transition-colors duration-300`}
-              ></span>
-              <span
-                className={`absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 ${toggle.circle} rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300`}
-              ></span>
+              <span className="block w-full h-full bg-[#121212] rounded-full peer-checked:bg-green-500 transition-colors duration-300"></span>
+              <span className="absolute left-1 top-1/2 -translate-y-1/2 w-4 h-4 bg-neutral-300 rounded-full shadow transform translate-x-0 peer-checked:translate-x-4 transition-transform duration-300"></span>
             </div>
           </label>
         </div>
       )}
 
-      <div className={`shadow-md rounded-lg ${themeClasses.textColor}`}>
+      <div className="shadow-md rounded-lg text-neutral-300">
         <div ref={timetableRef} className="overflow-x-auto">
           <table className="table-auto w-full">
             <thead>
               <tr>
-                <th
-                  className={`min-w-[4rem] text-xs sm:text-sm ${themeClasses.background} ${themeClasses.border} p-2`}
-                >
+                <th className="min-w-[4rem] text-xs sm:text-sm bg-[#1E1E1E] border border-neutral-300 p-2">
                   Day
                 </th>
                 {slots.map((time, index) => (
                   <th
                     key={index}
                     scope="col"
-                    className={`min-w-[7.5rem] text-xs sm:text-sm ${themeClasses.background} ${themeClasses.border} p-2`}
+                    className="min-w-[7.5rem] text-xs sm:text-sm bg-[#1E1E1E] border border-neutral-300 p-2"
                   >
                     {time}
                   </th>
@@ -221,10 +177,8 @@ const ViewTimetable = ({ courses = [] }) => {
             </thead>
             <tbody>
               {days.map((day, dayIndex) => (
-                <tr key={dayIndex} className={themeClasses.alternatebackground}>
-                  <td
-                    className={`min-w-[4rem] text-xs sm:text-sm ${themeClasses.background} ${themeClasses.border} p-2 font-semibold`}
-                  >
+                <tr key={dayIndex} className="bg-[#121212]">
+                  <td className="min-w-[4rem] text-xs sm:text-sm bg-[#1E1E1E] border border-neutral-300 p-2 font-semibold">
                     {day}
                   </td>
                   {timetable[dayIndex].map((slot, slotIndex) => {
@@ -232,7 +186,7 @@ const ViewTimetable = ({ courses = [] }) => {
                       return dayIndex === 0 ? (
                         <td
                           key={slotIndex}
-                          className={`min-w-[7.5rem] ${themeClasses.background} ${themeClasses.border} p-2`}
+                          className="min-w-[7.5rem] bg-[#1E1E1E] border border-neutral-300 p-2"
                           rowSpan={5}
                         >
                           <div className="flex justify-center items-center">
@@ -245,7 +199,7 @@ const ViewTimetable = ({ courses = [] }) => {
                     const courseExists = courses.some(
                       (course) => course.slot === slot
                     );
-
+                    
                     const color = courseExists
                       ? slotColors.find((color) => color.slot === slot)?.color
                       : "";
@@ -253,9 +207,9 @@ const ViewTimetable = ({ courses = [] }) => {
                     return (
                       <td
                         key={slotIndex}
-                        className={`min-w-[7.5rem] text-xs sm:text-sm ${
-                          themeClasses.border
-                        } p-2 ${courseExists ? themeClasses.bodyText : ""}`}
+                        className={`min-w-[7.5rem] text-xs sm:text-sm border border-neutral-300 p-2 ${
+                          courseExists ? "text-neutral-300" : ""
+                        }`}
                         style={{ backgroundColor: color }}
                       >
                         {getCourseDetails(slot)}
