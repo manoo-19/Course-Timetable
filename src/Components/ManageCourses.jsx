@@ -226,7 +226,10 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 </thead>
                 <tbody>
                   {courses.map((course, index) => (
-                    <tr key={index} className="odd:bg-slate-50 even:bg-slate-300">
+                    <tr
+                      key={index}
+                      className="odd:bg-slate-50 even:bg-slate-300"
+                    >
                       <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
                         {course.code}
                       </td>
@@ -245,7 +248,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                       <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
                         <button
                           onClick={() => handleUpdateCourse(course)}
-                          className="bg-red-500 text-white text-xs px-4 py-2 rounded-md hover:bg-red-600"
+                          className="bg-red-500 text-slate-100 text-xs px-4 py-2 rounded-md hover:bg-red-600"
                         >
                           Edit
                         </button>
@@ -281,7 +284,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
           />
           <button
             onClick={handleSearch}
-            className="bg-blue-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-blue-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -361,7 +364,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                         <td className="min-w-[4rem] p-2 text-xs sm:text-sm border-2 border-slate-200">
                           <button
                             onClick={() => handleAddCourse(course)}
-                            className="bg-green-500 text-white text-xs px-4 py-2 rounded-md hover:bg-green-600"
+                            className="bg-green-500 text-slate-100 text-xs px-4 py-2 rounded-md hover:bg-green-600"
                           >
                             Add
                           </button>
@@ -382,7 +385,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
 
       {/* Modal to Edit Course Name and Add Venue */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
           <div className="bg-slate-100 p-6 rounded-md w-[93%] max-w-sm">
             <h3 className="text-lg font-medium mb-6">
               {addOrDrop === "add" ? "Add Course" : "Update Course"}
@@ -395,7 +398,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 type="text"
                 value={aliasCourseName}
                 onChange={(e) => setAliasCourseName(e.target.value)}
-                className="p-2 border rounded-md w-full text-sm"
+                className="p-2 rounded-md w-full text-sm sm:text-left bg-slate-50 border-2 border-slate-200 focus:border-2 focus:border-slate-400 focus:outline-none"
               />
             </div>
 
@@ -407,14 +410,14 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 type="text"
                 value={venue}
                 onChange={(e) => setVenue(e.target.value)}
-                className="p-2 border rounded-md w-full text-sm"
+                className="p-2 rounded-md w-full text-sm sm:text-left bg-slate-50 border-2 border-slate-200 focus:border-2 focus:border-slate-400 focus:outline-none"
               />
             </div>
 
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleCancelModal}
-                className="bg-gray-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-gray-600"
+                className="bg-gray-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 Cancel
               </button>
@@ -425,7 +428,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     ? handleConfirmAddCourse
                     : handleConfirmUpdateCourse
                 }
-                className="bg-green-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-green-600"
+                className="bg-green-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-green-600"
               >
                 {addOrDrop === "add" ? "Add" : "Update"}
               </button>
@@ -433,7 +436,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               {addOrDrop === "update" && (
                 <button
                   onClick={handleConfirmRemoveCourse}
-                  className="bg-red-500 text-white text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-red-600"
+                  className="bg-red-500 text-slate-100 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-red-600"
                 >
                   Drop
                 </button>
