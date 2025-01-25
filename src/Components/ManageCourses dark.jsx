@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useTheme } from "./ThemeContext";
 
 const SHEET_ID = import.meta.env.VITE_SHEET_ID;
 const API_KEY = import.meta.env.VITE_API_KEY;
 const RANGE = import.meta.env.VITE_RANGE;
 
 const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
-  const { theme } = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,47 +17,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   const [addOrDrop, setAddOrDrop] = useState("");
   const [showResults, setShowResults] = useState(false);
 
-  const themeClasses =
-    theme === "dark"
-      ? {
-          container: "bg-neutral-800",
-          background: "bg-[#121212]",
-          alternateBackground: "bg-[#1E1E1E]",
-          inputBackground: "bg-[#121212]",
-          inputBorder: "border border-neutral-300 focus:border focus:border-neutral-400",
-          border: "border border-neutral-300",
-          hrLine: "border-neutral-400",
-          textColor: "text-neutral-300",
-          noCoursesText: "text-neutral-500",
-          buttonColors: {
-            edit: "bg-red-500 hover:bg-red-600 font-semibold",
-            add: "bg-green-600 hover:bg-green-700 font-semibold",
-            search: "bg-blue-500 hover:bg-blue-600 font-semibold",
-            cancel: "bg-[#121212] hover:bg-neutral-950 font-semibold",
-            update: "bg-green-600 hover:bg-green-700 font-semibold",
-            drop: "bg-red-500 hover:bg-red-600 font-semibold",
-          },
-        }
-      : {
-          container: "bg-slate-100",
-          background: "bg-slate-300",
-          alternateBackground: "bg-slate-50",
-          inputBackground: "bg-slate-50",
-          inputBorder: "border-2 border-slate-200 focus:bor der-2 focus:border-slate-400", 
-          border: "border-2 border-slate-200",
-          hrLine: "border-slate-400",
-          textColor: "text-black",
-          noCoursesText: "text-gray-500",
-          buttonColors: {
-            edit: "bg-red-500 text-slate-100 hover:bg-red-600 font-semibold",
-            add: "bg-green-500 text-slate-100 hover:bg-green-600 font-semibold",
-            search: "bg-blue-500 text-slate-100 hover:bg-blue-600 font-semibold",
-            cancel: "bg-gray-500 text-slate-100 hover:bg-gray-600 font-semibold",
-            update: "bg-green-500 text-slate-100 hover:bg-green-600 font-semibold",
-            drop: "bg-red-500 text-slate-100 hover:bg-red-600 font-semibold",
-          },
-        };
-
+  // Search for courses
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
       alert("Please enter a search query.");
@@ -234,9 +192,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
   };
 
   return (
-    <div
-      className={`flex flex-col items-center justify-center gap-6 text-center ${themeClasses.textColor}`}
-    >
+    <div className="flex flex-col items-center justify-center gap-6 text-center text-neutral-300">
       {/* Registered Courses */}
       <div className="w-full">
         <h3 className="text-base sm:text-lg font-medium mb-4">
@@ -247,35 +203,23 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             <div className="overflow-x-auto">
               <table className="table-auto w-full">
                 <thead>
-                  <tr className={themeClasses.background}>
-                    <th
-                      className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                    >
+                  <tr className="bg-[#121212]">
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Course Code
                     </th>
-                    <th
-                      className={`min-w-[7.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                    >
+                    <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Course Name
                     </th>
-                    <th
-                      className={`min-w-[5.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                    >
+                    <th className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Alias Name
                     </th>
-                    <th
-                      className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                    >
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Course Slot
                     </th>
-                    <th
-                      className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                    >
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Venue
                     </th>
-                    <th
-                      className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                    >
+                    <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                       Actions
                     </th>
                   </tr>
@@ -284,43 +228,27 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                   {courses.map((course, index) => (
                     <tr
                       key={index}
-                      className={`${
-                        theme === "dark"
-                          ? "odd:bg-[#1E1E1E] even:bg-[#121212]"
-                          : "odd:bg-slate-50 even:bg-slate-300"
-                      }`}
+                      className="odd:bg-[#1E1E1E] even:bg-[#121212]"
                     >
-                      <td
-                        className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.code}
                       </td>
-                      <td
-                        className={`min-w-[7.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.name}
                       </td>
-                      <td
-                        className={`min-w-[5.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <td className="min-w-[5.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.alias}
                       </td>
-                      <td
-                        className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.slot}
                       </td>
-                      <td
-                        className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         {course.venue}
                       </td>
-                      <td
-                        className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         <button
                           onClick={() => handleUpdateCourse(course)}
-                          className={`text-xs px-4 py-2 rounded-md ${themeClasses.buttonColors.edit}`}
+                          className="bg-red-500 text-xs px-4 py-2 rounded-md hover:bg-red-600 font-semibold"
                         >
                           Edit
                         </button>
@@ -332,13 +260,11 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
             </div>
           </div>
         ) : (
-          <p className={`${themeClasses.noCoursesText} text-sm`}>
-            No courses registered yet.
-          </p>
+          <p className="text-neutral-500 text-sm">No courses registered yet.</p>
         )}
       </div>
 
-      <hr className={`w-3/4 border-t ${themeClasses.hrLine}`} />
+      <hr className="w-3/4 border-t border-neutral-300" />
 
       {/* Search Bar */}
       <div className="w-full">
@@ -354,12 +280,12 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 handleSearch();
               }
             }}
-            className={`p-2 rounded-md w-full text-sm sm:text-left ${themeClasses.inputBackground} ${themeClasses.inputBorder} focus:outline-none`}
+            className="p-2 rounded-md w-full text-sm sm:text-left bg-[#121212] border border-neutral-300 focus:border focus:border-neutral-400 focus:outline-none"
           />
           <button
             onClick={handleSearch}
+            className="bg-blue-500 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-blue-600"
             disabled={isLoading}
-            className={`text-xs sm:text-sm px-4 py-2 rounded-md ${themeClasses.buttonColors.search}`}
           >
             {isLoading ? (
               <div className="flex items-center gap-2">
@@ -392,10 +318,9 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
         </div>
       </div>
 
-      {showResults && (
-        <hr className={`w-3/4 border-t ${themeClasses.hrLine}`} />
-      )}
+      {showResults && <hr className="w-3/4 border-t border-neutral-300" />}
 
+      {/* Search Results */}
       {showResults && (
         <div className="w-full">
           <h3 className="text-base sm:text-lg font-medium mb-4">
@@ -406,25 +331,17 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               <div className="overflow-x-auto">
                 <table className="table-auto w-full">
                   <thead>
-                    <tr className={themeClasses.background}>
-                      <th
-                        className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                    <tr className="bg-[#121212]">
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Course Code
                       </th>
-                      <th
-                        className={`min-w-[7.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <th className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Course Name
                       </th>
-                      <th
-                        className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <th className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Course Slot
                       </th>
-                      <th
-                        className={`min-w-[4rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                      >
+                      <th className="min-w-[4rem] p-2 text-xs sm:text-sm border border-neutral-300">
                         Actions
                       </th>
                     </tr>
@@ -433,33 +350,21 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     {filteredCourses.map((course, index) => (
                       <tr
                         key={index}
-                        className={`${
-                          theme === "dark"
-                            ? "odd:bg-[#1E1E1E] even:bg-[#121212]"
-                            : "odd:bg-slate-50 even:bg-slate-300"
-                        }`}
+                        className="odd:bg-[#1E1E1E] even:bg-[#121212]"
                       >
-                        <td
-                          className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                        >
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           {course.code}
                         </td>
-                        <td
-                          className={`min-w-[7.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                        >
+                        <td className="min-w-[7.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           {course.name}
                         </td>
-                        <td
-                          className={`min-w-[3.5rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                        >
+                        <td className="min-w-[3.5rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           {course.slot}
                         </td>
-                        <td
-                          className={`min-w-[4rem] p-2 text-xs sm:text-sm ${themeClasses.border}`}
-                        >
+                        <td className="min-w-[4rem] p-2 text-xs sm:text-sm border border-neutral-300">
                           <button
                             onClick={() => handleAddCourse(course)}
-                            className={`text-xs px-4 py-2 rounded-md ${themeClasses.buttonColors.add}`}
+                            className="bg-green-600 text-xs px-4 py-2 rounded-md hover:bg-green-700 font-semibold"
                           >
                             Add
                           </button>
@@ -471,7 +376,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               </div>
             </div>
           ) : (
-            <p className={`${themeClasses.noCoursesText} text-sm`}>
+            <p className="text-neutral-500 text-sm">
               No courses found for your search query.
             </p>
           )}
@@ -481,9 +386,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
       {/* Modal to Edit Course Name and Add Venue */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
-          <div
-            className={`p-6 rounded-md w-[93%] max-w-sm ${themeClasses.container}`}
-          >
+          <div className="bg-neutral-800 p-6 rounded-md w-[93%] max-w-sm">
             <h3 className="text-lg font-medium mb-6">
               {addOrDrop === "add" ? "Add Course" : "Update Course"}
             </h3>
@@ -495,7 +398,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 type="text"
                 value={aliasCourseName}
                 onChange={(e) => setAliasCourseName(e.target.value)}
-                className={`p-2 rounded-md w-full text-sm sm:text-left ${themeClasses.inputBackground} ${themeClasses.inputBorder} focus:outline-none`}
+                className="p-2 rounded-md w-full text-sm sm:text-left bg-[#121212] border border-neutral-300 focus:border focus:border-neutral-400 focus:outline-none"
               />
             </div>
 
@@ -507,14 +410,14 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 type="text"
                 value={venue}
                 onChange={(e) => setVenue(e.target.value)}
-                className={`p-2 rounded-md w-full text-sm sm:text-left ${themeClasses.inputBackground} ${themeClasses.inputBorder} focus:outline-none`}
+                className="p-2 rounded-md w-full text-sm sm:text-left bg-[#121212] border border-neutral-300 focus:border focus:border-neutral-400 focus:outline-none"
               />
             </div>
 
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleCancelModal}
-                className={`text-xs sm:text-sm px-4 py-2 rounded-md ${themeClasses.buttonColors.cancel}`}
+                className="bg-[#121212] text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-neutral-950 font-semibold"
               >
                 Cancel
               </button>
@@ -525,7 +428,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
                     ? handleConfirmAddCourse
                     : handleConfirmUpdateCourse
                 }
-                className={`text-xs sm:text-sm px-4 py-2 rounded-md ${themeClasses.buttonColors.update}`}
+                className="bg-green-600 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-green-700 font-semibold"
               >
                 {addOrDrop === "add" ? "Add" : "Update"}
               </button>
@@ -533,7 +436,7 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
               {addOrDrop === "update" && (
                 <button
                   onClick={handleConfirmRemoveCourse}
-                  className={`text-xs sm:text-sm px-4 py-2 rounded-md ${themeClasses.buttonColors.drop}`}
+                  className="bg-red-500 text-xs sm:text-sm px-4 py-2 rounded-md hover:bg-red-600 font-semibold"
                 >
                   Drop
                 </button>

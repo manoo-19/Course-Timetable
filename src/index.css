@@ -6,7 +6,12 @@
 
 :root {
   font-family: "Poppins", sans-serif;
-  /* background-color: rgb(226 232 240); */
-  /* background-color: rgb(148 163 184); */
-  background-color: rgb(203 213 225);
+}
+
+.light {
+  background-color: rgb(203 213 225); /* bg-slate-300 */
+}
+
+.dark {
+  background-color: black;
 }
