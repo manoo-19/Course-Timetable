@@ -24,31 +24,31 @@ const ViewTimetable = ({ courses = [] }) => {
   ];
 
   const darkSlotColors = [
-    { slot: "A", color: "#AF3029" }, // Red-600
-    { slot: "B", color: "#BC5215" }, // Orange-600
-    { slot: "C", color: "#AD8301" }, // Yellow-600
-    { slot: "D", color: "#66800B" }, // Green-600
-    { slot: "E", color: "#24837B" }, // Cyan-600
-    { slot: "F", color: "#205EA6" }, // Blue-600
-    { slot: "G", color: "#5E409D" }, // Purple-600
-    { slot: "P", color: "#A02F6F" }, // Magenta-600
-    { slot: "Q", color: "#ec1f5b" }, // Hot-Pink-600
-    { slot: "R", color: "#0C7B93" }, // Teal-600
-    { slot: "S", color: "#94776d" }, // Wood-600
+    { slot: "A", color: "#be123c" }, // Tailwind: rose-700
+    { slot: "B", color: "#ca8a04" }, // Tailwind: yellow-700
+    { slot: "C", color: "#0f766e" }, // Tailwind: teal-700
+    { slot: "D", color: "#92400e" }, // Tailwind: amber-800
+    { slot: "E", color: "#a21caf" }, // Tailwind: fuchsia-700
+    { slot: "F", color: "#c2410c" }, // Tailwind: orange-700
+    { slot: "G", color: "#1d4ed8" }, // Tailwind: blue-700
+    { slot: "P", color: "#6d28d9" }, // Tailwind: purple-700
+    { slot: "Q", color: "#b91c1c" }, // Tailwind: red-700
+    { slot: "R", color: "#4d7c0f" }, // Tailwind: lime-700
+    { slot: "S", color: "#0e7490" }, // Tailwind: cyan-700
   ];
 
   const lightSlotColors = [
-    { slot: "A", color: "#D14D41" }, // Red-400
-    { slot: "B", color: "#DA702C" }, // Orange-400
-    { slot: "C", color: "#D0A215" }, // Yellow-400
-    { slot: "D", color: "#879A39" }, // Green-400
-    { slot: "E", color: "#3AA99F" }, // Cyan-400
-    { slot: "F", color: "#4385BE" }, // Blue-400
-    { slot: "G", color: "#8B7EC8" }, // Purple-400
-    { slot: "P", color: "#CE5D97" }, // Magenta-400
-    { slot: "Q", color: "#ff204e" }, // Hot-Pink-400
-    { slot: "R", color: "#00A8CC" }, // Teal-400
-    { slot: "S", color: "#9c763e" }, // Wood-400
+    { slot: "A", color: "#e11d48" }, // Tailwind: rose-600
+    { slot: "B", color: "#ca8a04" }, // Tailwind: yellow-700
+    { slot: "C", color: "#0d9488" }, // Tailwind: teal-600
+    { slot: "D", color: "#b45309" }, // Tailwind: amber-700
+    { slot: "E", color: "#c026d3" }, // Tailwind: fuchsia-600
+    { slot: "F", color: "#ea580c" }, // Tailwind: orange-600
+    { slot: "G", color: "#2563eb" }, // Tailwind: blue-600
+    { slot: "P", color: "#7c3aed" }, // Tailwind: purple-600
+    { slot: "Q", color: "#dc2626" }, // Tailwind: red-600
+    { slot: "R", color: "#65a30d" }, // Tailwind: lime-600
+    { slot: "S", color: "#0891b2" }, // Tailwind: cyan-600
   ];
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -257,7 +257,9 @@ const ViewTimetable = ({ courses = [] }) => {
                         key={slotIndex}
                         className={`min-w-[7.5rem] text-xs sm:text-sm ${
                           themeClasses.border
-                        } p-2 ${courseExists ? themeClasses.courseTextColor : ""}`}
+                        } p-2 ${
+                          courseExists ? themeClasses.courseTextColor : ""
+                        }`}
                         style={{ backgroundColor: color }}
                       >
                         {getCourseDetails(slot)}
