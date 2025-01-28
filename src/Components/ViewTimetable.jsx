@@ -3,7 +3,7 @@ import { ImSpoonKnife } from "react-icons/im";
 import { toPng } from "html-to-image";
 import { useTheme } from "./ThemeContext";
 
-const ViewTimeTable = ({ courses = [] }) => {
+const ViewTimetable = ({ courses = [] }) => {
   const { theme } = useTheme();
 
   const timeSlots = [
@@ -537,4 +537,4 @@ const ViewTimeTable = ({ courses = [] }) => {
   );
 };
 
-export default ViewTimeTable;
+export default ViewTimetable;
