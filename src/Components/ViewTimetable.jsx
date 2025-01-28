@@ -1,30 +1,66 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import { ImSpoonKnife } from "react-icons/im";
 import { toPng } from "html-to-image";
 import { useTheme } from "./ThemeContext";
 
-const ViewTimetable = ({ courses = [] }) => {
+const ViewTimeTable = ({ courses = [] }) => {
   const { theme } = useTheme();
-  const slots = [
-    "9:00 - 9:55",
-    "10:00 - 10:55",
-    "11:00 - 11:55",
-    "12:00 - 12:55",
-    "12:55 - 14:30",
-    "14:30 - 16:00",
-    "16:00 - 17:25",
+
+  const timeSlots = [
+    { start: "9:00", end: "9:55" },
+    { start: "10:00", end: "10:55" },
+    { start: "11:00", end: "11:55" },
+    { start: "12:00", end: "12:55" },
+    { start: "12:55", end: "14:30" },
+    { start: "14:30", end: "15:55" },
+    { start: "16:00", end: "17:25" },
   ];
 
-  const timetable = [
-    ["A", "B", "C", "D", " ", "P", "Q"],
-    ["D", "E", "F", "G", " ", "R", "S"],
-    ["B", "C", "A", "G", " ", "F", "Challenge Lectures"],
-    ["C", "A", "B", "E", " ", "Q", "P"],
-    ["E", "F", "D", "G", " ", "S", "R"],
+  const timeTable = [
+    {
+      day: "Monday",
+      morningSlots: ["A", "B", "C"],
+      morningLab: "FN1",
+      noon: "D",
+      afternoonSlots: ["P", "Q"],
+      afternoonLab: "AN1",
+    },
+    {
+      day: "Tuesday",
+      morningSlots: ["D", "E", "F"],
+      morningLab: "FN2",
+      noon: "G",
+      afternoonSlots: ["R", "S"],
+      afternoonLab: "AN2",
+    },
+    {
+      day: "Wednesday",
+      morningSlots: ["B", "C", "A"],
+      morningLab: "FN3",
+      noon: "G",
+      afternoonSlots: ["F", "Challenge Lectures"],
+      afternoonLab: "AN3",
+    },
+    {
+      day: "Thursday",
+      morningSlots: ["C", "A", "B"],
+      morningLab: "FN4",
+      noon: "E",
+      afternoonSlots: ["Q", "P"],
+      afternoonLab: "AN4",
+    },
+    {
+      day: "Friday",
+      morningSlots: ["E", "F", "D"],
+      morningLab: "FN5",
+      noon: "G",
+      afternoonSlots: ["S", "R"],
+      afternoonLab: "AN5",
+    },
   ];
 
   const darkSlotColors = [
-    { slot: "A", color: "#be123c" }, // Tailwind: rose-700
+    { slot: "A", color: "#b91c1c" }, // Tailwind: red-700
     { slot: "B", color: "#ca8a04" }, // Tailwind: yellow-700
     { slot: "C", color: "#0f766e" }, // Tailwind: teal-700
     { slot: "D", color: "#92400e" }, // Tailwind: amber-800
@@ -32,13 +68,23 @@ const ViewTimetable = ({ courses = [] }) => {
     { slot: "F", color: "#c2410c" }, // Tailwind: orange-700
     { slot: "G", color: "#1d4ed8" }, // Tailwind: blue-700
     { slot: "P", color: "#6d28d9" }, // Tailwind: purple-700
-    { slot: "Q", color: "#b91c1c" }, // Tailwind: red-700
+    { slot: "Q", color: "#be123c" }, // Tailwind: rose-700
     { slot: "R", color: "#4d7c0f" }, // Tailwind: lime-700
     { slot: "S", color: "#0e7490" }, // Tailwind: cyan-700
+    { slot: "FN1", color: "#b91c1c" }, // A
+    { slot: "AN1", color: "#6d28d9" }, // P
+    { slot: "FN2", color: "#a21caf" }, // E
+    { slot: "AN2", color: "#4d7c0f" }, // R
+    { slot: "FN3", color: "#0f766e" }, // C
+    { slot: "AN3", color: "#c2410c" }, // F
+    { slot: "FN4", color: "#ca8a04" }, // B
+    { slot: "AN4", color: "#be123c" }, // Q
+    { slot: "FN5", color: "#92400e" }, // D
+    { slot: "AN5", color: "#0e7490" }, // S
   ];
 
   const lightSlotColors = [
-    { slot: "A", color: "#e11d48" }, // Tailwind: rose-600
+    { slot: "A", color: "#dc2626" }, // Tailwind: red-600
     { slot: "B", color: "#ca8a04" }, // Tailwind: yellow-700
     { slot: "C", color: "#0d9488" }, // Tailwind: teal-600
     { slot: "D", color: "#b45309" }, // Tailwind: amber-700
@@ -46,22 +92,69 @@ const ViewTimetable = ({ courses = [] }) => {
     { slot: "F", color: "#ea580c" }, // Tailwind: orange-600
     { slot: "G", color: "#2563eb" }, // Tailwind: blue-600
     { slot: "P", color: "#7c3aed" }, // Tailwind: purple-600
-    { slot: "Q", color: "#dc2626" }, // Tailwind: red-600
+    { slot: "Q", color: "#e11d48" }, // Tailwind: rose-600
     { slot: "R", color: "#65a30d" }, // Tailwind: lime-600
     { slot: "S", color: "#0891b2" }, // Tailwind: cyan-600
+    { slot: "FN1", color: "#dc2626" }, // A
+    { slot: "AN1", color: "#7c3aed" }, // P
+    { slot: "FN2", color: "#c026d3" }, // E
+    { slot: "AN2", color: "#65a30d" }, // R
+    { slot: "FN3", color: "#0d9488" }, // C
+    { slot: "AN3", color: "#ea580c" }, // F
+    { slot: "FN4", color: "#ca8a04" }, // B
+    { slot: "AN4", color: "#e11d48" }, // Q
+    { slot: "FN5", color: "#b45309" }, // D
+    { slot: "AN5", color: "#0891b2" }, // S
   ];
-
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
   const [showCourseCode, setShowCourseCode] = useState(false);
   const [showVenue, setShowVenue] = useState(false);
 
-  const timetableRef = useRef(null);
+  const timeTableRef = useRef(null);
+
+  const slotColors = theme === "dark" ? darkSlotColors : lightSlotColors;
+
+  const toggle =
+    theme === "dark"
+      ? {
+          bg: "bg-[#121212]",
+          circle: "bg-neutral-300",
+        }
+      : {
+          bg: "bg-slate-300",
+          circle: "bg-slate-50",
+        };
+
+  const themeClasses =
+    theme === "dark"
+      ? {
+          container: "bg-neutral-800",
+          background: "bg-[#1E1E1E]",
+          alternateBackground: "bg-[#121212]",
+          border: "border-2 border-neutral-400",
+          textColor: "text-neutral-300",
+          courseTextColor: "text-neutral-300",
+        }
+      : {
+          container: "bg-slate-100",
+          background: "bg-slate-300",
+          alternateBackground: "bg-slate-50",
+          border: "border-2 border-slate-200",
+          textColor: "text-black",
+          courseTextColor: "text-slate-50",
+        };
+
+  const slotToCourseMap = courses.reduce((map, course) => {
+    map[course.slot] = course;
+    return map;
+  }, {});
 
   const getCourseDetails = (slot) => {
     const course = courses.find((course) => course.slot === slot);
     return course ? (
-      <div className="flex flex-col font-medium">
+      <div
+        className={`flex flex-col font-medium ${themeClasses.courseTextColor}`}
+      >
         {showCourseCode && (
           <div className="flex flex-col items-center gap-1">
             <span>
@@ -84,65 +177,33 @@ const ViewTimetable = ({ courses = [] }) => {
   };
 
   const handleExportAsImage = async () => {
-    const timetableElement = timetableRef.current;
+    const timeTableElement = timeTableRef.current;
 
-    if (!timetableElement) {
-      console.error("Timetable element not found!");
+    if (!timeTableElement) {
+      console.error("TimeTable element not found!");
       return;
     }
 
     try {
-      const dataUrl = await toPng(timetableElement, {
+      const dataUrl = await toPng(timeTableElement, {
         backgroundColor: "white",
         cacheBust: true,
         pixelRatio: 2,
-        width: timetableElement.scrollWidth + 32,
-        height: timetableElement.scrollHeight + 32,
+        width: timeTableElement.scrollWidth + 32,
+        height: timeTableElement.scrollHeight + 32,
         style: {
           padding: "16px",
         },
       });
 
       const link = document.createElement("a");
-      link.download = "timetable.png";
+      link.download = "timeTable.png";
       link.href = dataUrl;
       link.click();
     } catch (error) {
-      console.error("Error exporting timetable as image:", error);
+      console.error("Error exporting timeTable as image:", error);
     }
   };
-
-  const slotColors = theme === "dark" ? darkSlotColors : lightSlotColors;
-
-  const toggle =
-    theme === "dark"
-      ? {
-          bg: "bg-[#121212]",
-          circle: "bg-neutral-300",
-        }
-      : {
-          bg: "bg-slate-300",
-          circle: "bg-slate-50",
-        };
-
-  const themeClasses =
-    theme === "dark"
-      ? {
-          container: "bg-neutral-800",
-          background: "bg-[#1E1E1E]",
-          alternatebackground: "bg-[#121212]",
-          border: "border border-neutral-300",
-          textColor: "text-neutral-300",
-          courseTextColor: "text-neutral-300",
-        }
-      : {
-          container: "bg-slate-100",
-          background: "bg-slate-300",
-          alternateBackground: "bg-slate-50",
-          border: "border-2 border-slate-200",
-          textColor: "text-black",
-          courseTextColor: "text-slate-50",
-        };
 
   return (
     <div className="flex flex-col gap-6 text-center">
@@ -201,7 +262,7 @@ const ViewTimetable = ({ courses = [] }) => {
       )}
 
       <div className={`shadow-md rounded-lg ${themeClasses.textColor}`}>
-        <div ref={timetableRef} className="overflow-x-auto">
+        <div ref={timeTableRef} className="overflow-x-auto">
           <table className="table-auto w-full">
             <thead>
               <tr>
@@ -210,64 +271,255 @@ const ViewTimetable = ({ courses = [] }) => {
                 >
                   Day
                 </th>
-                {slots.map((time, index) => (
+                {timeSlots.map((slot, timeIndex) => (
                   <th
-                    key={index}
+                    key={timeIndex}
                     scope="col"
                     className={`min-w-[7.5rem] text-xs sm:text-sm ${themeClasses.background} ${themeClasses.border} p-2`}
                   >
-                    {time}
+                    {slot.start}
+                    <br />
+                    {slot.end}
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {days.map((day, dayIndex) => (
-                <tr key={dayIndex} className={themeClasses.alternatebackground}>
-                  <td
-                    className={`min-w-[4rem] text-xs sm:text-sm ${themeClasses.background} ${themeClasses.border} p-2 font-semibold`}
-                  >
-                    {day}
-                  </td>
-                  {timetable[dayIndex].map((slot, slotIndex) => {
-                    if (slot === " " && slotIndex === 4) {
-                      return dayIndex === 0 ? (
+              {timeTable.map((row, dayIndex) => {
+                const isCourseInMorningSlots = courses.some((course) =>
+                  row.morningSlots.includes(course.slot)
+                );
+
+                const isCourseInAfternoonSlots = courses.some((course) =>
+                  row.afternoonSlots.includes(course.slot)
+                );
+
+                const isCourseInMorningLab = courses.some(
+                  (course) => course.slot === row.morningLab
+                );
+
+                const isCourseInAfternoonLab = courses.some(
+                  (course) => course.slot === row.afternoonLab
+                );
+
+                let rowSpanDay = null;
+                let rowSpanMorning = null;
+                let rowSpanAfternoon = null;
+                let displayMorningSlots = null;
+                let displayMorningLab = null;
+                let displayAfternoonSlots = null;
+                let displayAfternoonLab = null;
+
+                if (isCourseInMorningSlots) {
+                  displayMorningSlots = null;
+                  displayMorningLab = "hidden";
+                } else if (isCourseInMorningLab) {
+                  displayMorningSlots = "hidden";
+                  displayMorningLab = null;
+                }
+
+                if (isCourseInAfternoonSlots) {
+                  displayAfternoonSlots = null;
+                  displayAfternoonLab = "hidden";
+                } else if (isCourseInAfternoonLab) {
+                  displayAfternoonSlots = "hidden";
+                  displayAfternoonLab = null;
+                }
+
+                const isCourseInMorning =
+                  isCourseInMorningSlots || isCourseInMorningLab;
+                const isCourseInAfternoon =
+                  isCourseInAfternoonSlots || isCourseInAfternoonLab;
+
+                if (isCourseInMorning && isCourseInAfternoon) {
+                  rowSpanDay = 1;
+                  rowSpanMorning = 1;
+                  rowSpanAfternoon = 1;
+                } else {
+                  if (isCourseInMorning) {
+                    rowSpanDay = 2;
+                    rowSpanMorning = 2;
+                    rowSpanAfternoon = 1;
+                  } else if (isCourseInAfternoon) {
+                    rowSpanDay = 2;
+                    rowSpanMorning = 1;
+                    rowSpanAfternoon = 2;
+                  } else {
+                    rowSpanDay = 2;
+                    rowSpanMorning = 1;
+                    rowSpanAfternoon = 1;
+                  }
+                }
+
+                let courseBoxClasses = `min-w-[7.5rem] text-xs sm:text-sm ${themeClasses.border} p-2`;
+
+                return (
+                  <React.Fragment key={dayIndex}>
+                    <tr
+                      key={dayIndex}
+                      className={`${themeClasses.alternateBackground}`}
+                    >
+                      <td
+                        rowSpan={rowSpanDay}
+                        className={`min-w-[4rem] text-xs sm:text-sm ${themeClasses.background} ${themeClasses.border} p-2 font-semibold`}
+                      >
+                        {row.day}
+                      </td>
+                      {/* Morning slots */}
+                      {row.morningSlots.map((slot, slotIndex) => {
+                        const courseExists = courses.some(
+                          (course) => course.slot === slot
+                        );
+
+                        const color = courseExists
+                          ? slotColors.find((color) => color.slot === slot)
+                              ?.color
+                          : "";
+
+                        return (
+                          <td
+                            key={slotIndex}
+                            rowSpan={rowSpanMorning}
+                            className={`${courseBoxClasses} ${displayMorningSlots}`}
+                            style={{ backgroundColor: color }}
+                          >
+                            {getCourseDetails(slot)}
+                          </td>
+                        );
+                      })}
+
+                      {displayMorningSlots === "hidden" && (
                         <td
-                          key={slotIndex}
+                          rowSpan={rowSpanMorning}
+                          colSpan="3"
+                          className={`${courseBoxClasses} ${displayMorningLab}`}
+                          style={{
+                            backgroundColor: courses.some(
+                              (course) => course.slot === row.morningLab
+                            )
+                              ? slotColors.find(
+                                  (color) => color.slot === row.morningLab
+                                )?.color
+                              : "",
+                          }}
+                        >
+                          {getCourseDetails(row.morningLab)}
+                        </td>
+                      )}
+
+                      <td
+                        rowSpan={rowSpanDay}
+                        className={`${courseBoxClasses}`}
+                        style={{
+                          backgroundColor: courses.some(
+                            (course) => course.slot === row.noon
+                          )
+                            ? slotColors.find(
+                                (color) => color.slot === row.noon
+                              )?.color
+                            : "",
+                        }}
+                      >
+                        {getCourseDetails(row.noon)}
+                      </td>
+
+                      {dayIndex === 0 && (
+                        <td
+                          rowSpan={10}
                           className={`min-w-[7.5rem] ${themeClasses.background} ${themeClasses.border} p-2`}
-                          rowSpan={5}
                         >
                           <div className="flex justify-center items-center">
                             <ImSpoonKnife className="text-4xl" />
                           </div>
                         </td>
-                      ) : null;
-                    }
+                      )}
 
-                    const courseExists = courses.some(
-                      (course) => course.slot === slot
-                    );
+                      {/* Afternoon slots */}
+                      {row.afternoonSlots.map((slot, slotIndex) => {
+                        const courseExists = courses.some(
+                          (course) => course.slot === slot
+                        );
 
-                    const color = courseExists
-                      ? slotColors.find((color) => color.slot === slot)?.color
-                      : "";
+                        const color = courseExists
+                          ? slotColors.find((color) => color.slot === slot)
+                              ?.color
+                          : "";
 
-                    return (
-                      <td
-                        key={slotIndex}
-                        className={`min-w-[7.5rem] text-xs sm:text-sm ${
-                          themeClasses.border
-                        } p-2 ${
-                          courseExists ? themeClasses.courseTextColor : ""
-                        }`}
-                        style={{ backgroundColor: color }}
-                      >
-                        {getCourseDetails(slot)}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
+                        return (
+                          <td
+                            key={slotIndex}
+                            rowSpan={rowSpanAfternoon}
+                            className={`${courseBoxClasses} ${displayAfternoonSlots}`}
+                            style={{ backgroundColor: color }}
+                          >
+                            {getCourseDetails(slot)}
+                          </td>
+                        );
+                      })}
+
+                      {displayAfternoonSlots === "hidden" && (
+                        <td
+                          rowSpan={rowSpanAfternoon}
+                          colSpan="2"
+                          className={`${courseBoxClasses} ${displayAfternoonLab}`}
+                          style={{
+                            backgroundColor: courses.some(
+                              (course) => course.slot === row.afternoonLab
+                            )
+                              ? slotColors.find(
+                                  (color) => color.slot === row.afternoonLab
+                                )?.color
+                              : "",
+                          }}
+                        >
+                          {getCourseDetails(row.afternoonLab)}
+                        </td>
+                      )}
+                    </tr>
+                    <tr className={`${themeClasses.alternateBackground}`}>
+                      {/* Morning label */}
+                      {displayMorningSlots === null && (
+                        <td
+                          rowSpan={rowSpanMorning}
+                          colSpan="3"
+                          className={`${courseBoxClasses} ${displayMorningLab}`}
+                          style={{
+                            backgroundColor: courses.some(
+                              (course) => course.slot === row.morningLab
+                            )
+                              ? slotColors.find(
+                                  (color) => color.slot === row.morningLab
+                                )?.color
+                              : "",
+                          }}
+                        >
+                          {getCourseDetails(row.morningLab)}
+                        </td>
+                      )}
+
+                      {/* Afternoon label */}
+                      {displayAfternoonSlots === null && (
+                        <td
+                          rowSpan={rowSpanAfternoon}
+                          colSpan="2"
+                          className={`${courseBoxClasses} ${displayAfternoonLab}`}
+                          style={{
+                            backgroundColor: courses.some(
+                              (course) => course.slot === row.afternoonLab
+                            )
+                              ? slotColors.find(
+                                  (color) => color.slot === row.afternoonLab
+                                )?.color
+                              : "",
+                          }}
+                        >
+                          {getCourseDetails(row.afternoonLab)}
+                        </td>
+                      )}
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -285,4 +537,4 @@ const ViewTimetable = ({ courses = [] }) => {
   );
 };
 
-export default ViewTimetable;
+export default ViewTimeTable;

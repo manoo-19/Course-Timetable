@@ -26,7 +26,8 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
           background: "bg-[#121212]",
           alternateBackground: "bg-[#1E1E1E]",
           inputBackground: "bg-[#121212]",
-          inputBorder: "border border-neutral-300 focus:border focus:border-neutral-400",
+          inputBorder:
+            "border border-neutral-300 focus:border focus:border-neutral-400",
           border: "border border-neutral-300",
           hrLine: "border-neutral-400",
           textColor: "text-neutral-300",
@@ -45,7 +46,8 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
           background: "bg-slate-300",
           alternateBackground: "bg-slate-50",
           inputBackground: "bg-slate-50",
-          inputBorder: "border-2 border-slate-200 focus:bor der-2 focus:border-slate-400", 
+          inputBorder:
+            "border-2 border-slate-200 focus:bor der-2 focus:border-slate-400",
           border: "border-2 border-slate-200",
           hrLine: "border-slate-400",
           textColor: "text-black",
@@ -53,9 +55,12 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
           buttonColors: {
             edit: "bg-red-500 text-slate-100 hover:bg-red-600 font-semibold",
             add: "bg-green-500 text-slate-100 hover:bg-green-600 font-semibold",
-            search: "bg-blue-500 text-slate-100 hover:bg-blue-600 font-semibold",
-            cancel: "bg-gray-500 text-slate-100 hover:bg-gray-600 font-semibold",
-            update: "bg-green-500 text-slate-100 hover:bg-green-600 font-semibold",
+            search:
+              "bg-blue-500 text-slate-100 hover:bg-blue-600 font-semibold",
+            cancel:
+              "bg-gray-500 text-slate-100 hover:bg-gray-600 font-semibold",
+            update:
+              "bg-green-500 text-slate-100 hover:bg-green-600 font-semibold",
             drop: "bg-red-500 text-slate-100 hover:bg-red-600 font-semibold",
           },
         };
@@ -129,24 +134,19 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
     const trimmedAliasCourseName = aliasCourseName.trim();
     const trimmedVenue = venue.trim().toUpperCase();
 
-    if (!trimmedAliasCourseName || !trimmedVenue) {
-      alert("Please fill in all the fields.");
-      return;
-    }
+    // if (!trimmedAliasCourseName || !trimmedVenue) {
+    //   alert("Please fill in all the fields.");
+    //   return;
+    // }
 
     const isAliasExist = courses.some(
       (c) => c.alias === trimmedAliasCourseName && c !== courseToUpdate
     );
 
     if (isAliasExist) {
-      alert("This alias is already taken by another course.");
+      alert("This alias name is already taken by another course.");
       return;
     }
-
-    // if (!trimmedAliasCourseName || !trimmedVenue) {
-    //   alert("Please fill in all the fields.");
-    //   return;
-    // }
 
     const updatedCourse = {
       ...courseToUpdate,
@@ -196,20 +196,49 @@ const ManageCourses = ({ courses, addCourse, removeCourse, updateCourse }) => {
 
     const isCourseExist = courses.some((c) => c.code === updatedCourse.code);
     const isAliasExist = courses.some((c) => c.alias === updatedCourse.alias);
-    const isSlotTaken = courses.some((c) => c.slot === updatedCourse.slot);
 
     if (isCourseExist) {
-      alert("This course is already registered.");
+      alert("This Course is already registered.");
       return;
     }
 
     if (isAliasExist) {
-      alert("This alias is already taken by another course.");
+      alert("This alias name is already taken by another course.");
       return;
     }
 
+    const slotGroup = {
+      A: ["FN1", "FN3", "FN4", "A"],
+      B: ["FN1", "FN3", "FN4", "B"],
+      C: ["FN1", "FN3", "FN4", "C"],
+      D: ["FN2", "FN5", "D"],
+      E: ["FN2", "FN5", "E"],
+      F: ["FN2", "FN5", "AN3", "F"],
+      G: ["G"],
+      P: ["AN1", "AN4", "P"],
+      Q: ["AN1", "AN4", "Q"],
+      R: ["AN2", "AN5", "R"],
+      S: ["AN2", "AN5", "S"],
+      FN1: ["A", "B", "C", "FN1"],
+      AN1: ["P", "Q", "AN1"],
+      FN2: ["D", "E", "F", "FN2"],
+      AN2: ["R", "S", "AN2"],
+      FN3: ["B", "C", "A", "FN3"],
+      AN3: ["F", "AN3"],
+      FN4: ["C", "A", "B", "FN4"],
+      AN4: ["Q", "P", "AN4"],
+      FN5: ["E", "F", "D", "FN5"],
+      AN5: ["S", "R", "AN5"],
+    };
+
+    const selectedSlotGroup = slotGroup[updatedCourse.slot] || [];
+
+    const isSlotTaken = courses.find((c) => selectedSlotGroup.includes(c.slot));
+
     if (isSlotTaken) {
-      alert("This slot is already taken by another course.");
+      alert(
+        `OOPS! Slot is already taken by the course "${isSlotTaken.name}" (${isSlotTaken.slot}). Please choose another slot.`
+      );
       return;
     }
 

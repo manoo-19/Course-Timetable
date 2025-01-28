@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ThemeProvider } from "./Components/ThemeContext";
 import ThemeToggle from "./Components/ThemeToggle";
 import ManageCourses from "./Components/ManageCourses";
-import ViewTimetable from "./Components/ViewTimetable";
+import ViewTimeTable from "./Components/ViewTimeTable";
 
 const App = () => {
   const [courses, setCourses] = useState([]);
@@ -67,7 +67,7 @@ const App = () => {
                 updateCourse={updateCourse}
               />
             ) : (
-              <ViewTimetable courses={courses} />
+              <ViewTimeTable courses={courses} />
             )}
           </div>
         </div>
