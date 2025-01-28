@@ -132,6 +132,7 @@ const ViewTimetable = ({ courses = [] }) => {
           background: "bg-[#1E1E1E]",
           alternateBackground: "bg-[#121212]",
           border: "border-2 border-neutral-400",
+          borderBottom: "border-b-2 border-neutral-400",
           textColor: "text-neutral-300",
           courseTextColor: "text-neutral-300",
         }
@@ -140,6 +141,7 @@ const ViewTimetable = ({ courses = [] }) => {
           background: "bg-slate-300",
           alternateBackground: "bg-slate-50",
           border: "border-2 border-slate-200",
+          borderBottom: "border-b-2 border-slate-200",
           textColor: "text-black",
           courseTextColor: "text-slate-50",
         };
@@ -423,15 +425,25 @@ const ViewTimetable = ({ courses = [] }) => {
                         {getCourseDetails(row.noon)}
                       </td>
 
-                      {dayIndex === 0 && (
+                      {dayIndex === 2 ? (
                         <td
-                          rowSpan={10}
-                          className={`min-w-[7.5rem] ${themeClasses.background} ${themeClasses.border} p-2`}
+                          rowSpan={rowSpanDay}
+                          className={`min-w-[7.5rem] ${themeClasses.background} p-2`}
                         >
                           <div className="flex justify-center items-center">
                             <ImSpoonKnife className="text-4xl" />
                           </div>
                         </td>
+                      ) : dayIndex === 4 ? (
+                        <td
+                          rowSpan={rowSpanDay}
+                          className={`min-w-[7.5rem] ${themeClasses.background} ${themeClasses.borderBottom} p-2`}
+                        ></td>
+                      ) : (
+                        <td
+                          rowSpan={rowSpanDay}
+                          className={`min-w-[7.5rem] ${themeClasses.background} p-2`}
+                        ></td>
                       )}
 
                       {/* Afternoon slots */}
